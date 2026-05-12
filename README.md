@@ -42,6 +42,7 @@ Additional states can be added later by creating new state dossier files in `dat
 - Compare two state dossiers with `compare <state> <state>`
 - Canonical tax category normalization for state-specific cannabis taxes
 - Tax category validation during `validate`
+- Active license count reporting with source/as-of/confidence fields
 
 ## Planned Features
 
@@ -104,6 +105,12 @@ Show cannabis taxes grouped by canonical tax category:
 
 ```bash
 cargo run -- tax-categories
+```
+
+Show active license count sources and known counts:
+
+```bash
+cargo run -- licenses
 ```
 
 ## Data Philosophy

@@ -73,6 +73,12 @@ enum Commands {
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
+    /// Show active license count sources and known counts
+    Licenses {
+        /// Directory containing state YAML files
+        #[arg(short, long, default_value = "data/states")]
+        data_dir: PathBuf,
+    },
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -190,6 +196,55 @@ struct InvalidTaxCategory {
     state: String,
     tax_name: String,
     category: String,
+}
+
+#[derive(Debug)]
+struct ActiveLicenseIssue {
+    state: String,
+    message: String,
+}
+
+fn find_active_license_issues(dossiers: &[StateDossier]) -> Vec<ActiveLicenseIssue> {
+    let mut issues = Vec::new();
+
+    for dossier in dossiers {
+        let state = dossier.state.abbreviation.to_uppercase();
+        let active = &dossier.active_licenses;
+
+        let has_total = active.total.is_some();
+        let has_by_type = !active.by_type.is_empty();
+        let has_any_count = has_total || has_by_type;
+
+        if has_any_count && is_unknown_or_empty(&active.source_url) {
+            issues.push(ActiveLicenseIssue {
+                state: state.clone(),
+                message: "has active license counts but no source_url".to_string(),
+            });
+        }
+
+        if has_any_count && is_unknown_or_empty(&active.as_of) {
+            issues.push(ActiveLicenseIssue {
+                state: state.clone(),
+                message: "has active license counts but no as_of date".to_string(),
+            });
+        }
+
+        if has_any_count && is_unknown_or_empty(&active.confidence) {
+            issues.push(ActiveLicenseIssue {
+                state: state.clone(),
+                message: "has active license counts but no confidence".to_string(),
+            });
+        }
+
+        if has_any_count && is_unknown_or_empty(&active.source_quality) {
+            issues.push(ActiveLicenseIssue {
+                state: state.clone(),
+                message: "has active license counts but no source_quality".to_string(),
+            });
+        }
+    }
+
+    issues
 }
 
 fn find_invalid_tax_categories(dossiers: &[StateDossier]) -> Vec<InvalidTaxCategory> {
@@ -424,6 +479,7 @@ fn main() -> Result<()> {
             Commands::Coverage { data_dir } => report_coverage(&data_dir),
             Commands::Categories { data_dir } => show_license_categories(&data_dir),
             Commands::TaxCategories { data_dir } => show_tax_categories(&data_dir),
+            Commands::Licenses { data_dir } => show_active_licenses(&data_dir),
         }
 }
 
@@ -505,6 +561,18 @@ fn validate_states(data_dir: &Path) -> Result<()> {
                 "- {}: '{}' uses invalid category '{}'",
                 issue.state, issue.tax_name, issue.category
             );
+        }
+    }
+
+    let active_license_issues = find_active_license_issues(&dossiers);
+
+    if active_license_issues.is_empty() {
+        println!("OK: active license counts have required source fields.");
+    } else {
+        println!("Active license count issues:");
+
+        for issue in active_license_issues {
+            println!("- {}: {}", issue.state, issue.message);
         }
     }
 
@@ -811,6 +879,56 @@ fn show_tax_categories(data_dir: &Path) -> Result<()> {
             labels.dedup();
 
             println!("  {}: {}", state, labels.join(", "));
+        }
+
+        println!();
+    }
+
+    Ok(())
+}
+
+fn show_active_licenses(data_dir: &Path) -> Result<()> {
+    let dossiers = load_all_dossiers(data_dir)?;
+
+    println!("MOBY Atlas Active License Counts");
+    println!();
+
+    for dossier in dossiers {
+        println!("{}:", dossier.state.abbreviation.to_uppercase());
+
+        println!(
+            "  Total: {}",
+            format_optional_count(dossier.active_licenses.total)
+        );
+
+        println!(
+            "  As of: {}",
+            format_empty_as_unknown(&dossier.active_licenses.as_of)
+        );
+
+        println!(
+            "  Source: {}",
+            format_empty_as_unknown(&dossier.active_licenses.source_url)
+        );
+
+        println!(
+            "  Source Quality: {}",
+            format_empty_as_unknown(&dossier.active_licenses.source_quality)
+        );
+
+        println!(
+            "  Confidence: {}",
+            format_empty_as_unknown(&dossier.active_licenses.confidence)
+        );
+
+        if dossier.active_licenses.by_type.is_empty() {
+            println!("  By Type: unknown");
+        } else {
+            println!("  By Type:");
+
+            for count in dossier.active_licenses.by_type {
+                println!("    - {}: {}", count.license_type, count.count);
+            }
         }
 
         println!();

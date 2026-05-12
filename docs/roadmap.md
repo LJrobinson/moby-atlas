@@ -121,6 +121,20 @@ Fields:
 - official source URL
 - source confidence
 
+CLI support:
+
+```bash
+cargo run -- licenses
+```
+
+Validation support:
+
+- warns when active license counts exist without a source URL
+- warns when active license counts exist without an as-of date
+- warns when active license counts exist without source quality/confidence
+
+status: complete
+
 ## v0.7.0 - Export Commands
 
 Add export support:
