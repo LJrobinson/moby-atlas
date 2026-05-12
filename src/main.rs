@@ -51,6 +51,13 @@ enum Commands {
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
+
+    /// Report dossier coverage status for all states
+    Coverage {
+        /// Directory containing state YAML files
+        #[arg(short, long, default_value = "data/states")]
+        data_dir: PathBuf,
+    },
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -155,6 +162,195 @@ struct OfficialSource {
     notes: String,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum CoverageStatus {
+    Complete,
+    Partial,
+    Incomplete,
+}
+
+impl CoverageStatus {
+    fn as_str(self) -> &'static str {
+        match self {
+            CoverageStatus::Complete => "complete",
+            CoverageStatus::Partial => "partial",
+            CoverageStatus::Incomplete => "incomplete",
+        }
+    }
+}
+
+fn report_coverage(data_dir: &Path) -> Result<()> {
+    let dossiers = load_all_dossiers(data_dir)?;
+
+    let mut complete_count = 0;
+    let mut partial_count = 0;
+    let mut incomplete_count = 0;
+
+    println!("MOBY Atlas Coverage Report");
+    println!();
+
+    for dossier in &dossiers {
+        let status = coverage_status(dossier);
+
+        match status {
+            CoverageStatus::Complete => complete_count += 1,
+            CoverageStatus::Partial => partial_count += 1,
+            CoverageStatus::Incomplete => incomplete_count += 1,
+        }
+
+        println!(
+            "{}: {}",
+            dossier.state.abbreviation.to_uppercase(),
+            status.as_str()
+        );
+    }
+
+    println!();
+    println!("Summary:");
+    println!("Complete: {complete_count}");
+    println!("Partial: {partial_count}");
+    println!("Incomplete: {incomplete_count}");
+
+    Ok(())
+}
+
+fn coverage_status(dossier: &StateDossier) -> CoverageStatus {
+    let score = coverage_score(dossier);
+
+    if score >= 8 {
+        CoverageStatus::Complete
+    } else if score >= 4 {
+        CoverageStatus::Partial
+    } else {
+        CoverageStatus::Incomplete
+    }
+}
+
+fn coverage_score(dossier: &StateDossier) -> u8 {
+    let mut score = 0;
+
+    if has_program_status(dossier) {
+        score += 1;
+    }
+
+    if has_regulatory_body(dossier) {
+        score += 1;
+    }
+
+    if has_track_and_trace(dossier) {
+        score += 1;
+    }
+
+    if has_license_types(dossier) {
+        score += 1;
+    }
+
+    if has_taxes(dossier) {
+        score += 1;
+    }
+
+    if has_active_license_source(dossier) {
+        score += 1;
+    }
+
+    if has_official_sources(dossier) {
+        score += 1;
+    }
+
+    if has_source_receipts(dossier) {
+        score += 1;
+    }
+
+    score
+}
+
+fn has_program_status(dossier: &StateDossier) -> bool {
+    !is_unknown_or_empty(&dossier.programs.medical.status)
+        || !is_unknown_or_empty(&dossier.programs.adult_use.status)
+}
+
+fn has_regulatory_body(dossier: &StateDossier) -> bool {
+    dossier
+        .regulatory_bodies
+        .iter()
+        .any(|body| !is_unknown_or_empty(&body.name) && !is_unknown_or_empty(&body.website))
+}
+
+fn has_track_and_trace(dossier: &StateDossier) -> bool {
+    !is_unknown_or_empty(&dossier.track_and_trace.system)
+        && !is_unknown_or_empty(&dossier.track_and_trace.source_url)
+}
+
+fn has_license_types(dossier: &StateDossier) -> bool {
+    dossier.license_types.iter().any(|license| {
+        !is_unknown_or_empty(&license.name)
+            && !is_unknown_or_empty(&license.category)
+            && !is_unknown_or_empty(&license.source_url)
+    })
+}
+
+fn has_taxes(dossier: &StateDossier) -> bool {
+    dossier.taxes.iter().any(|tax| {
+        !is_unknown_or_empty(&tax.name)
+            && !is_unknown_or_empty(&tax.applies_to)
+            && !is_unknown_or_empty(&tax.source_url)
+    })
+}
+
+fn has_active_license_source(dossier: &StateDossier) -> bool {
+    !is_unknown_or_empty(&dossier.active_licenses.source_url)
+}
+
+fn has_official_sources(dossier: &StateDossier) -> bool {
+    dossier.official_sources.iter().any(|source| {
+        !is_unknown_or_empty(&source.title)
+            && !is_unknown_or_empty(&source.source_type)
+            && !is_unknown_or_empty(&source.url)
+    })
+}
+
+fn has_source_receipts(dossier: &StateDossier) -> bool {
+    let track_has_receipt = has_receipt_fields(
+        &dossier.track_and_trace.source_quality,
+        &dossier.track_and_trace.last_checked,
+        &dossier.track_and_trace.confidence,
+    );
+
+    let license_has_receipt = dossier.license_types.iter().any(|license| {
+        has_receipt_fields(
+            &license.source_quality,
+            &license.last_checked,
+            &license.confidence,
+        )
+    });
+
+    let tax_has_receipt = dossier.taxes.iter().any(|tax| {
+        has_receipt_fields(&tax.source_quality, &tax.last_checked, &tax.confidence)
+    });
+
+    let official_source_has_receipt = dossier.official_sources.iter().any(|source| {
+        has_receipt_fields(
+            &source.source_quality,
+            &source.last_checked,
+            &source.confidence,
+        )
+    });
+
+    track_has_receipt || license_has_receipt || tax_has_receipt || official_source_has_receipt
+}
+
+fn has_receipt_fields(source_quality: &str, last_checked: &str, confidence: &str) -> bool {
+    !is_unknown_or_empty(source_quality)
+        && !is_unknown_or_empty(last_checked)
+        && !is_unknown_or_empty(confidence)
+}
+
+fn is_unknown_or_empty(value: &str) -> bool {
+    let normalized = value.trim().to_lowercase();
+
+    normalized.is_empty() || normalized == "unknown"
+}
+
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
@@ -167,6 +363,7 @@ fn main() -> Result<()> {
                 right,
                 data_dir,
             } => compare_states(&left, &right, &data_dir),
+            Commands::Coverage { data_dir } => report_coverage(&data_dir),
         }
 }
 

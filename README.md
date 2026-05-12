@@ -21,6 +21,7 @@ The first coverage target includes:
 - PA - Pennsylvania
 - MA - Massachusetts
 - MD - Maryland
+- ME - Maine
 - MI - Michigan
 - WV - West Virginia
 - OR - Oregon
