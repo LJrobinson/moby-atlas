@@ -59,6 +59,7 @@ license_types:
 
 taxes:
   - name: Medical Marijuana Gross Receipts Tax
+    category: gross_receipts_tax
     applies_to: "Gross receipts from the sale of medical marijuana by a grower/processor to a dispensary"
     rate: "5%"
     source_url: "https://www.pa.gov/agencies/revenue/resources/tax-types-and-information/medical-marijuana-tax"
@@ -67,6 +68,7 @@ taxes:
     confidence: high
     notes: "Growers/processors and clinical registrant growers/processors must file quarterly medical marijuana gross receipts tax returns."
   - name: Adult-Use Cannabis Tax
+    category: adult_use_tax
     applies_to: "Adult-use cannabis sales"
     rate: ""
     source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana"

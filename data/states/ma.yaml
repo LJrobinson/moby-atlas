@@ -83,6 +83,7 @@ license_types:
 
 taxes:
   - name: State Sales Tax
+    category: state_sales_tax
     applies_to: "Adult-use marijuana retail sales"
     rate: "6.25%"
     source_url: "https://masscannabiscontrol.com/open-data/sales-and-product-distribution/"
@@ -91,6 +92,7 @@ taxes:
     confidence: high
     notes: "Medical-use marijuana is not subject to tax when qualifying patient ID requirements are met."
   - name: State Excise Tax
+    category: retail_excise_tax
     applies_to: "Adult-use marijuana and marijuana products"
     rate: "10.75%"
     source_url: "https://masscannabiscontrol.com/state-local-government/cannabis-revenue/"
@@ -99,6 +101,7 @@ taxes:
     confidence: high
     notes: "Massachusetts CCC states medical marijuana sales are tax free."
   - name: Local Option Tax
+    category: local_option_tax
     applies_to: "Adult-use marijuana retail sales where adopted by municipality"
     rate: "up to 3%"
     source_url: "https://www.mass.gov/local-option-excise-taxes"

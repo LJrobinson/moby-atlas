@@ -89,6 +89,7 @@ license_types:
 
 taxes:
   - name: Adult-Use Cannabis Sales and Use Tax
+    category: retail_excise_tax
     applies_to: "Retail sales of adult-use cannabis and adult-use cannabis products"
     rate: "12%"
     source_url: "https://www.marylandcomptroller.gov/content/dam/mdcomp/md/media/2025/12-22-2025-maryland-collects-26-million-in-cannabis-tax-revenue-july-through-september-2025.pdf"
@@ -97,6 +98,7 @@ taxes:
     confidence: high
     notes: "Maryland Comptroller release states the adult-use cannabis sales and use tax increased from 9% to 12% on July 1, 2025."
   - name: Medical Cannabis Sales Tax
+    category: medical_cannabis_tax
     applies_to: "Sales to registered medical cannabis patients"
     rate: "0%"
     source_url: "https://www.marylandcomptroller.gov/cannabis.html"

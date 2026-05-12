@@ -71,6 +71,7 @@ license_types:
 
 taxes:
   - name: Cannabis Excise Tax
+    category: cannabis_excise_tax
     applies_to: "Gross receipts from the retail sale of cannabis or cannabis products"
     rate: "15%"
     source_url: "https://cdtfa.ca.gov/taxes-and-fees/special-taxes-and-fees-tax-rates/"
@@ -79,6 +80,7 @@ taxes:
     confidence: high
     notes: "CDTFA lists the cannabis excise tax at 15% effective October 1, 2025, after a temporary 19% period from July 1, 2025 through September 30, 2025."
   - name: State Sales and Use Tax
+    category: state_sales_tax
     applies_to: "Retail sales of cannabis and cannabis products, unless a specific exemption applies"
     rate: "varies"
     source_url: "https://cdtfa.ca.gov/industry/cannabis/tax-facts.htm"
@@ -87,6 +89,7 @@ taxes:
     confidence: high
     notes: "Cannabis retailers generally must collect applicable sales and use tax in addition to cannabis excise tax."
   - name: Local Cannabis Business Taxes
+    category: local_option_tax
     applies_to: "Local cannabis business activity where adopted by city or county"
     rate: "varies"
     source_url: "https://www.cannabis.ca.gov/resources/local-jurisdictions/"
@@ -95,6 +98,7 @@ taxes:
     confidence: medium
     notes: "California local jurisdictions may impose local cannabis business taxes or other local requirements. Rates vary by locality."
   - name: Cultivation Tax
+    category: cultivation_tax
     applies_to: "Historical cannabis cultivation tax"
     rate: "ended"
     source_url: "https://cdtfa.ca.gov/taxes-and-fees/special-taxes-and-fees-tax-rates/"

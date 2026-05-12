@@ -76,21 +76,38 @@ Planned CLI support:
 cargo run -- categories
 ```
 
-status: in progress
+status: complete
 
 ## v0.5.0 - Tax Model Normalization
 
 Track cannabis-specific taxes by state.
 
-Potential categories:
+Canonical tax categories include:
 
-- cannabis excise tax
-- retail cannabis tax
-- wholesale tax
-- cultivation tax
-- local option tax
-- medical cannabis tax
-- adult-use cannabis tax
+- cannabis_excise_tax
+- retail_excise_tax
+- wholesale_tax
+- distributor_tax
+- cultivation_tax
+- local_option_tax
+- medical_cannabis_tax
+- adult_use_tax
+- state_sales_tax
+- gross_receipts_tax
+
+CLI support:
+
+```bash
+cargo run -- tax-categories
+```
+
+Validation support:
+
+- verifies tax categories use approved canonical values
+- warns on unknown or invalid tax category values
+- shows state-specific tax names grouped by canonical tax category
+
+status: complete
 
 ## v0.6.0 - Active License Counts
 

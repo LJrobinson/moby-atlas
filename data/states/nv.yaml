@@ -65,6 +65,7 @@ license_types:
 
 taxes:
   - name: Retail Cannabis Excise Tax
+    category: retail_excise_tax
     applies_to: "Adult-use retail cannabis sales"
     rate: "10%"
     source_url: "https://tax.nv.gov/wp-content/uploads/2026/04/NV-Cannabis-Revenue-FY26.pdf"
@@ -73,6 +74,7 @@ taxes:
     confidence: high
     notes: "Nevada Department of Taxation cannabis revenue reports reference Retail Cannabis Excise Tax and taxable sales."
   - name: Wholesale Cannabis Excise Tax
+    category: wholesale_tax
     applies_to: "Wholesale cannabis transactions"
     rate: ""
     source_url: "https://ccb.nv.gov/wp-content/uploads/2026/02/CCB-Tax-Release-Annual-Cannabis-Taxable-Sales-Data-V2.pdf"

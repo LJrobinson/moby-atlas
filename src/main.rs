@@ -66,6 +66,13 @@ enum Commands {
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
+
+    /// Show cannabis taxes grouped by canonical tax category
+    TaxCategories {
+        /// Directory containing state YAML files
+        #[arg(short, long, default_value = "data/states")]
+        data_dir: PathBuf,
+    },
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -132,6 +139,7 @@ struct LicenseType {
 #[derive(Debug, Serialize, Deserialize)]
 struct TaxRule {
     name: String,
+    category: String,
     applies_to: String,
     rate: String,
     source_url: String,
@@ -175,6 +183,48 @@ enum CoverageStatus {
     Complete,
     Partial,
     Incomplete,
+}
+
+#[derive(Debug)]
+struct InvalidTaxCategory {
+    state: String,
+    tax_name: String,
+    category: String,
+}
+
+fn find_invalid_tax_categories(dossiers: &[StateDossier]) -> Vec<InvalidTaxCategory> {
+    let valid_categories = canonical_tax_categories();
+    let mut invalid = Vec::new();
+
+    for dossier in dossiers {
+        let state = dossier.state.abbreviation.to_uppercase();
+
+        for tax in &dossier.taxes {
+            if is_unknown_or_empty(&tax.name) && is_unknown_or_empty(&tax.category) {
+                continue;
+            }
+
+            if is_unknown_or_empty(&tax.category) {
+                invalid.push(InvalidTaxCategory {
+                    state: state.clone(),
+                    tax_name: format_empty_as_unknown(&tax.name),
+                    category: "unknown".to_string(),
+                });
+
+                continue;
+            }
+
+            if !valid_categories.contains(&tax.category.as_str()) {
+                invalid.push(InvalidTaxCategory {
+                    state: state.clone(),
+                    tax_name: format_empty_as_unknown(&tax.name),
+                    category: tax.category.clone(),
+                });
+            }
+        }
+    }
+
+    invalid
 }
 
 impl CoverageStatus {
@@ -373,6 +423,7 @@ fn main() -> Result<()> {
             } => compare_states(&left, &right, &data_dir),
             Commands::Coverage { data_dir } => report_coverage(&data_dir),
             Commands::Categories { data_dir } => show_license_categories(&data_dir),
+            Commands::TaxCategories { data_dir } => show_tax_categories(&data_dir),
         }
 }
 
@@ -438,6 +489,21 @@ fn validate_states(data_dir: &Path) -> Result<()> {
             println!(
                 "- {}: '{}' uses invalid category '{}'",
                 issue.state, issue.license_name, issue.category
+            );
+        }
+    }
+
+    let invalid_tax_categories = find_invalid_tax_categories(&dossiers);
+
+    if invalid_tax_categories.is_empty() {
+        println!("OK: all tax categories are canonical.");
+    } else {
+        println!("Invalid tax categories:");
+
+        for issue in invalid_tax_categories {
+            println!(
+                "- {}: '{}' uses invalid category '{}'",
+                issue.state, issue.tax_name, issue.category
             );
         }
     }
@@ -707,6 +773,52 @@ fn show_license_categories(data_dir: &Path) -> Result<()> {
     Ok(())
 }
 
+fn show_tax_categories(data_dir: &Path) -> Result<()> {
+    let dossiers = load_all_dossiers(data_dir)?;
+    let mut categories: BTreeMap<String, BTreeMap<String, Vec<String>>> = BTreeMap::new();
+
+    for dossier in dossiers {
+        let state_abbr = dossier.state.abbreviation.to_uppercase();
+
+        for tax in dossier.taxes {
+            if is_unknown_or_empty(&tax.name) || is_unknown_or_empty(&tax.category) {
+                continue;
+            }
+
+            let label = format!(
+                "{} - {}",
+                tax.name,
+                format_empty_as_unknown(&tax.rate)
+            );
+
+            categories
+                .entry(tax.category)
+                .or_default()
+                .entry(state_abbr.clone())
+                .or_default()
+                .push(label);
+        }
+    }
+
+    println!("MOBY Atlas Tax Categories");
+    println!();
+
+    for (category, states) in categories {
+        println!("{category}:");
+
+        for (state, mut labels) in states {
+            labels.sort();
+            labels.dedup();
+
+            println!("  {}: {}", state, labels.join(", "));
+        }
+
+        println!();
+    }
+
+    Ok(())
+}
+
 #[derive(Debug)]
 struct InvalidLicenseCategory {
     state: String,
@@ -767,5 +879,21 @@ fn canonical_license_categories() -> &'static [&'static str] {
         "sample_collection",
         "testing_lab",
         "worker_permit",
+    ]
+}
+
+fn canonical_tax_categories() -> &'static [&'static str] {
+    &[
+        "adult_use_tax",
+        "cannabis_excise_tax",
+        "cultivation_tax",
+        "distributor_tax",
+        "gross_receipts_tax",
+        "local_option_tax",
+        "medical_cannabis_tax",
+        "retail_excise_tax",
+        "sales_tax",
+        "state_sales_tax",
+        "wholesale_tax",
     ]
 }

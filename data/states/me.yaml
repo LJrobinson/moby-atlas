@@ -65,6 +65,7 @@ license_types:
 
 taxes:
   - name: Adult-Use Cannabis Sales Tax
+    category: retail_excise_tax
     applies_to: "Retail sales of adult-use cannabis and adult-use cannabis products"
     rate: "14%"
     source_url: "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/IB61%20FINAL%20Sales%20of%20Adult%20Use%20Cannabis_2025_12_22.pdf"
@@ -73,6 +74,7 @@ taxes:
     confidence: medium
     notes: "Maine Revenue Services issued 2025 guidance on sales of adult-use cannabis. The rate should be re-verified against current official MRS rate tables before marking final."
   - name: Adult-Use Cannabis Excise Tax
+    category: cannabis_excise_tax
     applies_to: "Adult-use cannabis transfers/sales subject to Maine cannabis excise tax"
     rate: "varies by product/unit"
     source_url: "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/CannabisExciseJan2026_0.pdf"
@@ -81,6 +83,7 @@ taxes:
     confidence: high
     notes: "Maine Revenue Services 2026 cannabis excise return includes per-unit excise tax lines for flower, trim, mature plants, seedlings, immature plants, and seeds."
   - name: Cannabis Excise Tax Changes
+    category: cannabis_excise_tax
     applies_to: "Adult-use cannabis excise tax rates and taxable transfers"
     rate: "updated 2026"
     source_url: "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/GIB%20115_FINAL_2025_10_17_0.pdf"
@@ -89,6 +92,7 @@ taxes:
     confidence: high
     notes: "Maine Revenue Services General Information Bulletin 115 states cannabis excise tax rates were reduced and certain transfers to cultivation facility licensees are not subject to tax."
   - name: Medical Cannabis Tax
+    category: medical_cannabis_tax
     applies_to: "Medical cannabis sales"
     rate: ""
     source_url: "https://www.maine.gov/revenue/"

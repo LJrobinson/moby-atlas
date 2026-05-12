@@ -101,6 +101,7 @@ license_types:
 
 taxes:
   - name: Marijuana Retailers Excise Tax
+    category: retail_excise_tax
     applies_to: "Adult-use retail marijuana sales"
     rate: "10%"
     source_url: "https://www.michigan.gov/taxes/business-taxes/mret/about"
@@ -109,6 +110,7 @@ taxes:
     confidence: high
     notes: "Michigan Treasury states MRTMA imposes a 10% excise tax on retail marijuana sales in addition to 6% sales tax."
   - name: State Sales Tax
+    category: state_sales_tax
     applies_to: "Adult-use retail marijuana sales"
     rate: "6%"
     source_url: "https://www.michigan.gov/taxes/business-taxes/mret/about"
@@ -117,6 +119,7 @@ taxes:
     confidence: high
     notes: "Michigan Treasury administers both the 10% MRE tax and 6% sales tax."
   - name: Adult-Use Wholesale Marijuana Tax
+    category: wholesale_tax
     applies_to: "Adult-use marijuana wholesale transactions"
     rate: "24%"
     source_url: "https://tax.thomsonreuters.com/news/michigan-issues-additional-guidance-on-wholesale-tax-on-adult-use-marihuana/"

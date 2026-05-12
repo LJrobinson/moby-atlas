@@ -113,6 +113,7 @@ license_types:
 
 taxes:
   - name: State Retail Marijuana Excise Tax
+    category: cannabis_excise_tax
     applies_to: "First sale or transfer from a retail marijuana cultivation facility to a retail marijuana store or retail marijuana product manufacturing facility"
     rate: "15%"
     source_url: "https://tax.colorado.gov/marijuana-excise-tax"
@@ -121,6 +122,7 @@ taxes:
     confidence: high
     notes: "Colorado Department of Revenue states medical marijuana is not subject to this excise tax."
   - name: State Retail Marijuana Sales Tax
+    category: retail_excise_tax
     applies_to: "Retail marijuana sold in stores"
     rate: "15%"
     source_url: "https://cdor.colorado.gov/data-and-reports/marijuana-data/marijuana-tax-reports"
@@ -129,6 +131,7 @@ taxes:
     confidence: high
     notes: "Colorado marijuana tax reports identify state retail marijuana sales tax at 15%."
   - name: State Sales Tax
+    category: state_sales_tax
     applies_to: "Marijuana sold in stores where applicable"
     rate: "2.9%"
     source_url: "https://cdor.colorado.gov/data-and-reports/marijuana-data/marijuana-tax-reports"
@@ -137,6 +140,7 @@ taxes:
     confidence: high
     notes: "Colorado marijuana tax reports identify state sales tax revenue at 2.9% on marijuana sold in stores."
   - name: Local Marijuana Taxes
+    category: local_option_tax
     applies_to: "Local marijuana sales or business activity where imposed by local jurisdiction"
     rate: "varies"
     source_url: "https://tax.colorado.gov/marijuana-sales-tax"

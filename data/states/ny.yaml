@@ -95,6 +95,7 @@ license_types:
 
 taxes:
   - name: Adult-Use Cannabis Distributor Tax
+    category: distributor_tax
     applies_to: "Sale or transfer of adult-use cannabis products by a distributor to an adult-use cannabis products retailer"
     rate: "9%"
     source_url: "https://www.tax.ny.gov/bus/auc/"
@@ -103,6 +104,7 @@ taxes:
     confidence: high
     notes: "New York Tax Department states the 9% distributor tax is effective for sales on and after June 1, 2024."
   - name: Adult-Use Cannabis Retail Tax
+    category: retail_excise_tax
     applies_to: "Retail sale or transfer of adult-use cannabis products to retail customers"
     rate: "13%"
     source_url: "https://www.tax.ny.gov/bus/auc/"
@@ -111,6 +113,7 @@ taxes:
     confidence: high
     notes: "New York Tax Department states retailers pay retail taxes totaling 13% on adult-use cannabis retail sales or transfers."
   - name: Adult-Use Cannabis Sales Tax
+    category: state_sales_tax
     applies_to: "Adult-use cannabis products"
     rate: "exempt"
     source_url: "https://www.tax.ny.gov/bus/auc/"
@@ -119,6 +122,7 @@ taxes:
     confidence: high
     notes: "New York Tax Department states adult-use cannabis products are exempt from sales tax and vapor products tax."
   - name: Medical Cannabis Excise Tax
+    category: medical_cannabis_tax
     applies_to: "Gross receipts from medical cannabis sold or furnished to certified patients or designated caregivers"
     rate: "3.15%"
     source_url: "https://www.tax.ny.gov/bus/mc/medical-cannabis-tax.htm"

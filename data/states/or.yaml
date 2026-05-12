@@ -75,6 +75,7 @@ license_types:
 
 taxes:
   - name: State Recreational Marijuana Tax
+    category: retail_excise_tax
     applies_to: "Recreational marijuana sales by OLCC-licensed retailers"
     rate: "17%"
     source_url: "https://www.oregon.gov/dor/programs/businesses/pages/marijuana.aspx"
@@ -83,6 +84,7 @@ taxes:
     confidence: high
     notes: "Oregon DOR states OLCC-licensed retailers must charge a 17% statewide tax on all recreational marijuana sales."
   - name: Local Marijuana Tax
+    category: local_option_tax
     applies_to: "Recreational marijuana sales in cities or counties with voter-approved local tax"
     rate: "up to 3%"
     source_url: "https://www.oregon.gov/dor/programs/businesses/pages/marijuana-locality-tax.aspx"
@@ -91,6 +93,7 @@ taxes:
     confidence: high
     notes: "Oregon DOR states cities and counties may add a local tax of up to 3% on recreational marijuana sales with voter approval."
   - name: Medical Marijuana Sales Tax
+    category: medical_cannabis_tax
     applies_to: "Sales of marijuana items to Oregon Medical Marijuana Program cardholders"
     rate: "exempt"
     source_url: "https://www.oregon.gov/cjc/summit/Summit%20Media/ORMarijuanaTax.pdf"

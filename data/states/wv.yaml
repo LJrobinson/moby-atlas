@@ -53,6 +53,7 @@ license_types:
 
 taxes:
   - name: Medical Cannabis Tax
+    category: medical_cannabis_tax
     applies_to: "Gross receipts from medical cannabis sales received or accrued by dispensaries during the reporting period"
     rate: "10%"
     source_url: "https://code.wvlegislature.gov/16A-9-1/"
@@ -61,6 +62,7 @@ taxes:
     confidence: high
     notes: "West Virginia Code §16A-9-1 states the tax rate is 10% of gross receipts received or accrued by the dispensary during the reporting period."
   - name: Cannabis Dispensary Tax
+    category: medical_cannabis_tax
     applies_to: "Gross receipts received or accrued on medical cannabis by permitted medical cannabis dispensaries"
     rate: "10%"
     source_url: "https://tax.wv.gov/business/excisetax/pages/excisetax.aspx"
@@ -69,6 +71,7 @@ taxes:
     confidence: high
     notes: "West Virginia Tax Division identifies Cannabis Dispensary Tax as a 10% quarterly tax on medical cannabis gross receipts."
   - name: Adult-Use Cannabis Tax
+    category: adult_use_tax
     applies_to: "Adult-use cannabis sales"
     rate: ""
     source_url: "https://omc.wv.gov/"

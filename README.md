@@ -40,6 +40,8 @@ Additional states can be added later by creating new state dossier files in `dat
 - Show a state dossier as JSON
 - Validate required initial state coverage
 - Compare two state dossiers with `compare <state> <state>`
+- Canonical tax category normalization for state-specific cannabis taxes
+- Tax category validation during `validate`
 
 ## Planned Features
 
@@ -96,6 +98,12 @@ Generate a coverage report:
 
 ```bash
 cargo run -- coverage
+```
+
+Show cannabis taxes grouped by canonical tax category:
+
+```bash
+cargo run -- tax-categories
 ```
 
 ## Data Philosophy
