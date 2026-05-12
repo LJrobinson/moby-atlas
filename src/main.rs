@@ -38,6 +38,19 @@ enum Commands {
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
+
+    /// Compare two state dossiers
+    Compare {
+        /// First state abbreviation, such as NV
+        left: String,
+
+        /// Second state abbreviation, such as MA
+        right: String,
+
+        /// Directory containing state YAML files
+        #[arg(short, long, default_value = "data/states")]
+        data_dir: PathBuf,
+    },
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -85,6 +98,9 @@ struct TrackAndTrace {
     system: String,
     status: String,
     source_url: String,
+    source_quality: String,
+    last_checked: String,
+    confidence: String,
     notes: String,
 }
 
@@ -93,6 +109,9 @@ struct LicenseType {
     name: String,
     category: String,
     source_url: String,
+    source_quality: String,
+    last_checked: String,
+    confidence: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -101,6 +120,9 @@ struct TaxRule {
     applies_to: String,
     rate: String,
     source_url: String,
+    source_quality: String,
+    last_checked: String,
+    confidence: String,
     notes: String,
 }
 
@@ -109,6 +131,9 @@ struct ActiveLicenses {
     total: Option<u32>,
     as_of: String,
     source_url: String,
+    source_quality: String,
+    last_checked: String,
+    confidence: String,
     by_type: Vec<ActiveLicenseCount>,
 }
 
@@ -124,17 +149,25 @@ struct OfficialSource {
     #[serde(rename = "type")]
     source_type: String,
     url: String,
+    source_quality: String,
+    last_checked: String,
+    confidence: String,
     notes: String,
 }
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
-    match cli.command {
-        Commands::List { data_dir } => list_states(&data_dir),
-        Commands::Show { state, data_dir } => show_state(&state, &data_dir),
-        Commands::Validate { data_dir } => validate_states(&data_dir),
-    }
+        match cli.command {
+            Commands::List { data_dir } => list_states(&data_dir),
+            Commands::Show { state, data_dir } => show_state(&state, &data_dir),
+            Commands::Validate { data_dir } => validate_states(&data_dir),
+            Commands::Compare {
+                left,
+                right,
+                data_dir,
+            } => compare_states(&left, &right, &data_dir),
+        }
 }
 
 fn list_states(data_dir: &Path) -> Result<()> {
@@ -191,6 +224,195 @@ fn validate_states(data_dir: &Path) -> Result<()> {
     println!("Validated {} state dossier file(s).", dossiers.len());
 
     Ok(())
+}
+
+fn compare_states(left: &str, right: &str, data_dir: &Path) -> Result<()> {
+    let left_path = data_dir.join(format!("{}.yaml", left.to_lowercase()));
+    let right_path = data_dir.join(format!("{}.yaml", right.to_lowercase()));
+
+    let left_dossier = load_dossier(&left_path)?;
+    let right_dossier = load_dossier(&right_path)?;
+
+    let left_abbr = left_dossier.state.abbreviation.to_uppercase();
+    let right_abbr = right_dossier.state.abbreviation.to_uppercase();
+
+    println!("MOBY Atlas Compare: {left_abbr} vs {right_abbr}");
+    println!();
+
+    print_program_comparison(&left_dossier, &right_dossier);
+    print_regulator_comparison(&left_dossier, &right_dossier);
+    print_track_and_trace_comparison(&left_dossier, &right_dossier);
+    print_license_type_comparison(&left_dossier, &right_dossier);
+    print_tax_comparison(&left_dossier, &right_dossier);
+    print_active_license_comparison(&left_dossier, &right_dossier);
+
+    Ok(())
+}
+
+fn print_program_comparison(left: &StateDossier, right: &StateDossier) {
+    println!("Program Status:");
+
+    println!("  Medical:");
+    println!(
+        "    {}: {}, started {}",
+        left.state.abbreviation,
+        left.programs.medical.status,
+        format_optional_year(left.programs.medical.started_year)
+    );
+    println!(
+        "    {}: {}, started {}",
+        right.state.abbreviation,
+        right.programs.medical.status,
+        format_optional_year(right.programs.medical.started_year)
+    );
+
+    println!();
+
+    println!("  Adult Use:");
+    println!(
+        "    {}: {}, started {}",
+        left.state.abbreviation,
+        left.programs.adult_use.status,
+        format_optional_year(left.programs.adult_use.started_year)
+    );
+    println!(
+        "    {}: {}, started {}",
+        right.state.abbreviation,
+        right.programs.adult_use.status,
+        format_optional_year(right.programs.adult_use.started_year)
+    );
+
+    println!();
+}
+
+fn print_regulator_comparison(left: &StateDossier, right: &StateDossier) {
+    println!("Regulators:");
+
+    println!("  {}:", left.state.abbreviation);
+    for body in &left.regulatory_bodies {
+        println!("    - {}", format_empty_as_unknown(&body.name));
+    }
+
+    println!("  {}:", right.state.abbreviation);
+    for body in &right.regulatory_bodies {
+        println!("    - {}", format_empty_as_unknown(&body.name));
+    }
+
+    println!();
+}
+
+fn print_track_and_trace_comparison(left: &StateDossier, right: &StateDossier) {
+    println!("Track and Trace:");
+
+    println!(
+        "  {}: {} ({})",
+        left.state.abbreviation,
+        format_empty_as_unknown(&left.track_and_trace.system),
+        left.track_and_trace.status
+    );
+
+    println!(
+        "  {}: {} ({})",
+        right.state.abbreviation,
+        format_empty_as_unknown(&right.track_and_trace.system),
+        right.track_and_trace.status
+    );
+
+    println!();
+}
+
+fn print_license_type_comparison(left: &StateDossier, right: &StateDossier) {
+    println!("License Types:");
+
+    println!("  {}:", left.state.abbreviation);
+    for license in &left.license_types {
+        println!(
+            "    - {} [{}]",
+            format_empty_as_unknown(&license.name),
+            format_empty_as_unknown(&license.category)
+        );
+    }
+
+    println!();
+
+    println!("  {}:", right.state.abbreviation);
+    for license in &right.license_types {
+        println!(
+            "    - {} [{}]",
+            format_empty_as_unknown(&license.name),
+            format_empty_as_unknown(&license.category)
+        );
+    }
+
+    println!();
+}
+
+fn print_tax_comparison(left: &StateDossier, right: &StateDossier) {
+    println!("Taxes:");
+
+    println!("  {}:", left.state.abbreviation);
+    for tax in &left.taxes {
+        println!(
+            "    - {}: {}",
+            format_empty_as_unknown(&tax.name),
+            format_empty_as_unknown(&tax.rate)
+        );
+    }
+
+    println!();
+
+    println!("  {}:", right.state.abbreviation);
+    for tax in &right.taxes {
+        println!(
+            "    - {}: {}",
+            format_empty_as_unknown(&tax.name),
+            format_empty_as_unknown(&tax.rate)
+        );
+    }
+
+    println!();
+}
+
+fn print_active_license_comparison(left: &StateDossier, right: &StateDossier) {
+    println!("Active Licenses:");
+
+    println!(
+        "  {}: total {}, as of {}",
+        left.state.abbreviation,
+        format_optional_count(left.active_licenses.total),
+        format_empty_as_unknown(&left.active_licenses.as_of)
+    );
+
+    println!(
+        "  {}: total {}, as of {}",
+        right.state.abbreviation,
+        format_optional_count(right.active_licenses.total),
+        format_empty_as_unknown(&right.active_licenses.as_of)
+    );
+
+    println!();
+}
+
+fn format_optional_year(value: Option<u16>) -> String {
+    match value {
+        Some(year) => year.to_string(),
+        None => "unknown".to_string(),
+    }
+}
+
+fn format_optional_count(value: Option<u32>) -> String {
+    match value {
+        Some(count) => count.to_string(),
+        None => "unknown".to_string(),
+    }
+}
+
+fn format_empty_as_unknown(value: &str) -> String {
+    if value.trim().is_empty() {
+        "unknown".to_string()
+    } else {
+        value.to_string()
+    }
 }
 
 fn load_all_dossiers(data_dir: &Path) -> Result<Vec<StateDossier>> {

@@ -5,61 +5,148 @@ state:
 programs:
   medical:
     status: active
-    started_year: 2015
+    started_year: null
   adult_use:
     status: active
-    started_year: 2017
+    started_year: null
 
 regulatory_bodies:
-  - name: Nevada Cannabis Compliance Board
+  - name: Massachusetts Cannabis Control Commission
     type: cannabis_regulator
-    website: ""
-    notes: ""
+    website: "https://masscannabiscontrol.com/"
+    notes: "The Cannabis Control Commission administers laws enabling access to Medical and Adult Use Marijuana in Massachusetts."
 
 track_and_trace:
   system: Metrc
   status: active
-  source_url: ""
-  notes: ""
+  source_url: "https://masscannabiscontrol.com/applicants-licensees/adult-use-licensees/"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
+  notes: "Massachusetts adult-use licensee resources include seed-to-sale tracking guidance."
 
 license_types:
-  - name: Cultivation
+  - name: Marijuana Cultivator
     category: cultivation
-    source_url: ""
-  - name: Laboratory
-    category: testing_lab
-    source_url: ""
-  - name: Distribution
-    category: distribution
-    source_url: ""
-  - name: Production
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Craft Marijuana Cooperative
+    category: cultivation
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Product Manufacturer
     category: manufacturing
-    source_url: ""
-  - name: Retail Dispensary
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Retailer
     category: retail
-    source_url: ""
-  - name: Consumption Lounge
-    category: consumption
-    source_url: ""
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Research Facility
+    category: research
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Independent Testing Laboratory
+    category: testing_lab
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Standards Laboratory
+    category: testing_lab
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Transporter
+    category: distribution
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Microbusiness
+    category: microbusiness
+    source_url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
 
 taxes:
-  - name: Cannabis excise tax
-    applies_to: ""
-    rate: ""
-    source_url: ""
-    notes: ""
+  - name: State Sales Tax
+    applies_to: "Adult-use marijuana retail sales"
+    rate: "6.25%"
+    source_url: "https://masscannabiscontrol.com/open-data/sales-and-product-distribution/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Medical-use marijuana is not subject to tax when qualifying patient ID requirements are met."
+  - name: State Excise Tax
+    applies_to: "Adult-use marijuana and marijuana products"
+    rate: "10.75%"
+    source_url: "https://masscannabiscontrol.com/state-local-government/cannabis-revenue/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Massachusetts CCC states medical marijuana sales are tax free."
+  - name: Local Option Tax
+    applies_to: "Adult-use marijuana retail sales where adopted by municipality"
+    rate: "up to 3%"
+    source_url: "https://www.mass.gov/local-option-excise-taxes"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Cities and towns may impose a local excise of up to 3% on retail recreational marijuana sales."
 
 active_licenses:
   total: null
   as_of: ""
-  source_url: ""
+  source_url: "https://masscannabiscontrol.com/open-data/"
+  source_quality: official_open_data
+  last_checked: 2026-05-12
+  confidence: medium
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    notes: ""
+  - title: Massachusetts Cannabis Control Commission
+    type: regulator_homepage
+    url: "https://masscannabiscontrol.com/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary cannabis regulator for Massachusetts."
+  - title: Massachusetts Cannabis License Types
+    type: license_type_reference
+    url: "https://masscannabiscontrol.com/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official adult-use license type reference."
+  - title: Massachusetts Cannabis Revenue
+    type: tax_reference
+    url: "https://masscannabiscontrol.com/state-local-government/cannabis-revenue/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official CCC cannabis revenue and tax summary."
+  - title: Massachusetts Local Option Excise Taxes
+    type: tax_reference
+    url: "https://www.mass.gov/local-option-excise-taxes"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Massachusetts local option excise tax reference."
 
 notes:
-  - "Initial MOBY Atlas dossier placeholder."
+  - "Initial real Massachusetts dossier."
+  - "Medical and adult-use start years still need official source confirmation before finalizing."
+  - "Active license totals need to be extracted from official CCC open data or licensing tracker."

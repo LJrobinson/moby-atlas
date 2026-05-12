@@ -13,53 +13,107 @@ programs:
 regulatory_bodies:
   - name: Nevada Cannabis Compliance Board
     type: cannabis_regulator
-    website: ""
-    notes: ""
+    website: "https://ccb.nv.gov/"
+    notes: "The Nevada Cannabis Compliance Board governs Nevada's cannabis industry through regulation of licensing and operations."
 
 track_and_trace:
   system: Metrc
   status: active
-  source_url: ""
-  notes: ""
+  source_url: "https://ccb.nv.gov/"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
+  notes: "Nevada CCB site includes Metrc in its public navigation/resources."
 
 license_types:
   - name: Cultivation
     category: cultivation
-    source_url: ""
-  - name: Laboratory
-    category: testing_lab
-    source_url: ""
-  - name: Distribution
-    category: distribution
-    source_url: ""
+    source_url: "https://ccb.nv.gov/industry/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
   - name: Production
     category: manufacturing
-    source_url: ""
+    source_url: "https://ccb.nv.gov/industry/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Laboratory
+    category: testing_lab
+    source_url: "https://ccb.nv.gov/industry/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Distribution
+    category: distribution
+    source_url: "https://ccb.nv.gov/industry/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
   - name: Retail Dispensary
     category: retail
-    source_url: ""
+    source_url: "https://ccb.nv.gov/industry/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
   - name: Consumption Lounge
     category: consumption
-    source_url: ""
+    source_url: "https://ccb.nv.gov/list-of-licensees/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
 
 taxes:
-  - name: Cannabis excise tax
-    applies_to: ""
+  - name: Retail Cannabis Excise Tax
+    applies_to: "Adult-use retail cannabis sales"
+    rate: "10%"
+    source_url: "https://tax.nv.gov/wp-content/uploads/2026/04/NV-Cannabis-Revenue-FY26.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Nevada Department of Taxation cannabis revenue reports reference Retail Cannabis Excise Tax and taxable sales."
+  - name: Wholesale Cannabis Excise Tax
+    applies_to: "Wholesale cannabis transactions"
     rate: ""
-    source_url: ""
-    notes: ""
+    source_url: "https://ccb.nv.gov/wp-content/uploads/2026/02/CCB-Tax-Release-Annual-Cannabis-Taxable-Sales-Data-V2.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Included as a known Nevada cannabis tax category; rate should be verified directly against current statute/tax guidance before finalizing."
 
 active_licenses:
   total: null
-  as_of: ""
-  source_url: ""
+  as_of: "2026-04-01"
+  source_url: "https://ccb.nv.gov/list-of-licensees/"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    notes: ""
+  - title: Nevada Cannabis Compliance Board
+    type: regulator_homepage
+    url: "https://ccb.nv.gov/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary cannabis regulator for Nevada."
+  - title: Nevada Cannabis Licensees
+    type: active_license_list
+    url: "https://ccb.nv.gov/list-of-licensees/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Active license list shown as current as of 2026-04-01."
+  - title: Nevada Cannabis Industry
+    type: license_type_reference
+    url: "https://ccb.nv.gov/industry/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official CCB industry page describing licensed cannabis operators."
 
 notes:
-  - "Initial MOBY Atlas dossier placeholder."
+  - "Initial real Nevada dossier."
+  - "Active license totals still need to be extracted from official CCB license list."
+  - "Wholesale cannabis excise tax rate should be verified against current official tax/statutory source before marking final."

@@ -4,62 +4,62 @@ state:
 
 programs:
   medical:
-    status: active
-    started_year: 2015
+    status: unknown
+    started_year: null
   adult_use:
-    status: active
-    started_year: 2017
+    status: unknown
+    started_year: null
 
 regulatory_bodies:
-  - name: Nevada Cannabis Compliance Board
-    type: cannabis_regulator
+  - name: ""
+    type: ""
     website: ""
     notes: ""
 
 track_and_trace:
-  system: Metrc
-  status: active
+  system: ""
+  status: unknown
   source_url: ""
+  source_quality: unknown
+  last_checked: ""
+  confidence: unknown
   notes: ""
 
 license_types:
-  - name: Cultivation
-    category: cultivation
+  - name: ""
+    category: ""
     source_url: ""
-  - name: Laboratory
-    category: testing_lab
-    source_url: ""
-  - name: Distribution
-    category: distribution
-    source_url: ""
-  - name: Production
-    category: manufacturing
-    source_url: ""
-  - name: Retail Dispensary
-    category: retail
-    source_url: ""
-  - name: Consumption Lounge
-    category: consumption
-    source_url: ""
+    source_quality: unknown
+    last_checked: ""
+    confidence: unknown
 
 taxes:
-  - name: Cannabis excise tax
+  - name: ""
     applies_to: ""
     rate: ""
     source_url: ""
+    source_quality: unknown
+    last_checked: ""
+    confidence: unknown
     notes: ""
 
 active_licenses:
   total: null
   as_of: ""
   source_url: ""
+  source_quality: unknown
+  last_checked: ""
+  confidence: unknown
   by_type: []
 
 official_sources:
   - title: ""
     type: ""
     url: ""
+    source_quality: unknown
+    last_checked: ""
+    confidence: unknown
     notes: ""
 
 notes:
-  - "Initial MOBY Atlas dossier placeholder."
+  - "Initial MOBY Atlas placeholder dossier."
