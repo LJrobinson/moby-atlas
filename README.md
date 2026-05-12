@@ -43,6 +43,8 @@ Additional states can be added later by creating new state dossier files in `dat
 - Canonical tax category normalization for state-specific cannabis taxes
 - Tax category validation during `validate`
 - Active license count reporting with source/as-of/confidence fields
+- JSON export for full state dossiers
+- CSV export for flattened state summary data
 
 ## Planned Features
 
@@ -111,6 +113,25 @@ Show active license count sources and known counts:
 
 ```bash
 cargo run -- licenses
+```
+
+Export all dossiers as JSON:
+
+```bash
+cargo run -- export-json
+```
+
+Export flattened state summary CSV:
+
+```bash
+cargo run -- export-csv
+```
+
+Custom output paths:
+
+```bash
+cargo run -- export-json --out exports/moby-atlas.json
+cargo run -- export-csv --out exports/moby-atlas-states.csv
 ```
 
 ## Data Philosophy

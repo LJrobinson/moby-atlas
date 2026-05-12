@@ -144,6 +144,13 @@ cargo run -- export-json
 cargo run -- export-csv
 ```
 
+Export formats:
+
+JSON export preserves full nested state dossiers
+CSV export provides one flattened summary row per state
+
+status: complete
+
 ## v0.8.0 - Source Completeness Report
 
 Add a command to identify missing source links or incomplete dossiers.

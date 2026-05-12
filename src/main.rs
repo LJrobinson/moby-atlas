@@ -73,8 +73,31 @@ enum Commands {
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
+
     /// Show active license count sources and known counts
     Licenses {
+        /// Directory containing state YAML files
+        #[arg(short, long, default_value = "data/states")]
+        data_dir: PathBuf,
+    },
+
+    /// Export all state dossiers as JSON
+    ExportJson {
+        /// Output JSON file path
+        #[arg(short, long, default_value = "exports/moby-atlas.json")]
+        out: PathBuf,
+
+        /// Directory containing state YAML files
+        #[arg(short, long, default_value = "data/states")]
+        data_dir: PathBuf,
+    },
+
+    /// Export flattened state summary data as CSV
+    ExportCsv {
+        /// Output CSV file path
+        #[arg(short, long, default_value = "exports/moby-atlas-states.csv")]
+        out: PathBuf,
+
         /// Directory containing state YAML files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
@@ -202,6 +225,25 @@ struct InvalidTaxCategory {
 struct ActiveLicenseIssue {
     state: String,
     message: String,
+}
+
+#[derive(Debug, Serialize)]
+struct StateSummaryRow {
+    state: String,
+    abbreviation: String,
+    medical_status: String,
+    medical_started_year: String,
+    adult_use_status: String,
+    adult_use_started_year: String,
+    regulators: String,
+    track_and_trace_system: String,
+    track_and_trace_status: String,
+    license_type_count: usize,
+    tax_count: usize,
+    active_license_total: String,
+    active_license_as_of: String,
+    active_license_source: String,
+    active_license_confidence: String,
 }
 
 fn find_active_license_issues(dossiers: &[StateDossier]) -> Vec<ActiveLicenseIssue> {
@@ -480,6 +522,8 @@ fn main() -> Result<()> {
             Commands::Categories { data_dir } => show_license_categories(&data_dir),
             Commands::TaxCategories { data_dir } => show_tax_categories(&data_dir),
             Commands::Licenses { data_dir } => show_active_licenses(&data_dir),
+            Commands::ExportJson { out, data_dir } => export_json(&data_dir, &out),
+            Commands::ExportCsv { out, data_dir } => export_csv(&data_dir, &out),
         }
 }
 
@@ -977,6 +1021,74 @@ fn find_invalid_license_categories(dossiers: &[StateDossier]) -> Vec<InvalidLice
     }
 
     invalid
+}
+
+fn ensure_parent_dir(path: &Path) -> Result<()> {
+    if let Some(parent) = path.parent() {
+        if !parent.as_os_str().is_empty() {
+            fs::create_dir_all(parent)
+                .with_context(|| format!("Could not create output directory: {}", parent.display()))?;
+        }
+    }
+
+    Ok(())
+}
+
+fn export_json(data_dir: &Path, out: &Path) -> Result<()> {
+    let dossiers = load_all_dossiers(data_dir)?;
+    let json = serde_json::to_string_pretty(&dossiers)?;
+
+    ensure_parent_dir(out)?;
+
+    fs::write(out, json)
+        .with_context(|| format!("Could not write JSON export: {}", out.display()))?;
+
+    println!("Exported {} state dossier(s) to {}", dossiers.len(), out.display());
+
+    Ok(())
+}
+
+fn export_csv(data_dir: &Path, out: &Path) -> Result<()> {
+    let dossiers = load_all_dossiers(data_dir)?;
+
+    ensure_parent_dir(out)?;
+
+    let mut writer = csv::Writer::from_path(out)
+        .with_context(|| format!("Could not create CSV export: {}", out.display()))?;
+
+    for dossier in &dossiers {
+        let row = StateSummaryRow {
+            state: dossier.state.name.clone(),
+            abbreviation: dossier.state.abbreviation.to_uppercase(),
+            medical_status: dossier.programs.medical.status.clone(),
+            medical_started_year: format_optional_year(dossier.programs.medical.started_year),
+            adult_use_status: dossier.programs.adult_use.status.clone(),
+            adult_use_started_year: format_optional_year(dossier.programs.adult_use.started_year),
+            regulators: dossier
+                .regulatory_bodies
+                .iter()
+                .map(|body| body.name.clone())
+                .filter(|name| !is_unknown_or_empty(name))
+                .collect::<Vec<_>>()
+                .join("; "),
+            track_and_trace_system: format_empty_as_unknown(&dossier.track_and_trace.system),
+            track_and_trace_status: format_empty_as_unknown(&dossier.track_and_trace.status),
+            license_type_count: dossier.license_types.len(),
+            tax_count: dossier.taxes.len(),
+            active_license_total: format_optional_count(dossier.active_licenses.total),
+            active_license_as_of: format_empty_as_unknown(&dossier.active_licenses.as_of),
+            active_license_source: format_empty_as_unknown(&dossier.active_licenses.source_url),
+            active_license_confidence: format_empty_as_unknown(&dossier.active_licenses.confidence),
+        };
+
+        writer.serialize(row)?;
+    }
+
+    writer.flush()?;
+
+    println!("Exported {} state summary row(s) to {}", dossiers.len(), out.display());
+
+    Ok(())
 }
 
 fn canonical_license_categories() -> &'static [&'static str] {
