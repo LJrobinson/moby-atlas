@@ -92,6 +92,12 @@ Compare two states: `compare <state> <state>`
 cargo run -- compare nv ma
 ```
 
+Generate a coverage report:
+
+```bash
+cargo run -- coverage
+```
+
 ## Data Philosophy
 
 MOBY Atlas prioritizes:

@@ -3,6 +3,7 @@ use clap::{Parser, Subcommand};
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::collections::BTreeMap;
 
 #[derive(Parser, Debug)]
 #[command(name = "moby-atlas")]
@@ -54,6 +55,13 @@ enum Commands {
 
     /// Report dossier coverage status for all states
     Coverage {
+        /// Directory containing state YAML files
+        #[arg(short, long, default_value = "data/states")]
+        data_dir: PathBuf,
+    },
+
+    /// Show license labels grouped by canonical category
+    Categories {
         /// Directory containing state YAML files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
@@ -364,6 +372,7 @@ fn main() -> Result<()> {
                 data_dir,
             } => compare_states(&left, &right, &data_dir),
             Commands::Coverage { data_dir } => report_coverage(&data_dir),
+            Commands::Categories { data_dir } => show_license_categories(&data_dir),
         }
 }
 
@@ -413,8 +422,23 @@ fn validate_states(data_dir: &Path) -> Result<()> {
         println!("OK: all required initial MOBY Atlas states are present.");
     } else {
         println!("Missing required states:");
-        for state in missing {
+        for state in &missing {
             println!("- {state}");
+        }
+    }
+
+    let invalid_categories = find_invalid_license_categories(&dossiers);
+
+    if invalid_categories.is_empty() {
+        println!("OK: all license categories are canonical.");
+    } else {
+        println!("Invalid license categories:");
+
+        for issue in invalid_categories {
+            println!(
+                "- {}: '{}' uses invalid category '{}'",
+                issue.state, issue.license_name, issue.category
+            );
         }
     }
 
@@ -641,4 +665,107 @@ fn load_dossier(path: &Path) -> Result<StateDossier> {
         .with_context(|| format!("Could not parse dossier file: {}", path.display()))?;
 
     Ok(dossier)
+}
+
+fn show_license_categories(data_dir: &Path) -> Result<()> {
+    let dossiers = load_all_dossiers(data_dir)?;
+    let mut categories: BTreeMap<String, BTreeMap<String, Vec<String>>> = BTreeMap::new();
+
+    for dossier in dossiers {
+        let state_abbr = dossier.state.abbreviation.to_uppercase();
+
+        for license in dossier.license_types {
+            if is_unknown_or_empty(&license.name) || is_unknown_or_empty(&license.category) {
+                continue;
+            }
+
+            categories
+                .entry(license.category)
+                .or_default()
+                .entry(state_abbr.clone())
+                .or_default()
+                .push(license.name);
+        }
+    }
+
+    println!("MOBY Atlas License Categories");
+    println!();
+
+    for (category, states) in categories {
+        println!("{category}:");
+
+        for (state, mut labels) in states {
+            labels.sort();
+            labels.dedup();
+
+            println!("  {}: {}", state, labels.join(", "));
+        }
+
+        println!();
+    }
+
+    Ok(())
+}
+
+#[derive(Debug)]
+struct InvalidLicenseCategory {
+    state: String,
+    license_name: String,
+    category: String,
+}
+
+fn find_invalid_license_categories(dossiers: &[StateDossier]) -> Vec<InvalidLicenseCategory> {
+    let valid_categories = canonical_license_categories();
+    let mut invalid = Vec::new();
+
+    for dossier in dossiers {
+        let state = dossier.state.abbreviation.to_uppercase();
+
+        for license in &dossier.license_types {
+            if is_unknown_or_empty(&license.name) && is_unknown_or_empty(&license.category) {
+                continue;
+            }
+
+            if is_unknown_or_empty(&license.category) {
+                invalid.push(InvalidLicenseCategory {
+                    state: state.clone(),
+                    license_name: format_empty_as_unknown(&license.name),
+                    category: "unknown".to_string(),
+                });
+
+                continue;
+            }
+
+            if !valid_categories.contains(&license.category.as_str()) {
+                invalid.push(InvalidLicenseCategory {
+                    state: state.clone(),
+                    license_name: format_empty_as_unknown(&license.name),
+                    category: license.category.clone(),
+                });
+            }
+        }
+    }
+
+    invalid
+}
+
+fn canonical_license_categories() -> &'static [&'static str] {
+    &[
+        "consumption",
+        "cultivation",
+        "delivery",
+        "distribution",
+        "event",
+        "incubator",
+        "manufacturing",
+        "medical_to_adult_use_vertical",
+        "medical_vertical",
+        "microbusiness",
+        "operator",
+        "research",
+        "retail",
+        "sample_collection",
+        "testing_lab",
+        "worker_permit",
+    ]
 }

@@ -62,14 +62,21 @@ Normalize state-specific license names into canonical categories.
 
 Examples:
 
+| State Label | Canonical Category |
+|---|---|
+| Retail Dispensary | retail |
+| Marijuana Retailer | retail |
+| Provisioning Center | retail |
+| Processor | manufacturing |
+| Testing Laboratory | testing_lab |
 
-|State Label|Canonical Category|
-|:-----|:-----|
-|Retail Dispensary|retail|
-|Marijuana Retailer|retail|
-|Provisioning Center|retail|
-|Processor|manufacturing|
-|Testing Laboratory|testing_lab|
+Planned CLI support:
+
+```bash
+cargo run -- categories
+```
+
+status: in progress
 
 ## v0.5.0 - Tax Model Normalization
 
