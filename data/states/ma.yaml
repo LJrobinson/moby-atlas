@@ -1,0 +1,65 @@
+state:
+  name: Massachusetts
+  abbreviation: MA
+
+programs:
+  medical:
+    status: active
+    started_year: 2015
+  adult_use:
+    status: active
+    started_year: 2017
+
+regulatory_bodies:
+  - name: Nevada Cannabis Compliance Board
+    type: cannabis_regulator
+    website: ""
+    notes: ""
+
+track_and_trace:
+  system: Metrc
+  status: active
+  source_url: ""
+  notes: ""
+
+license_types:
+  - name: Cultivation
+    category: cultivation
+    source_url: ""
+  - name: Laboratory
+    category: testing_lab
+    source_url: ""
+  - name: Distribution
+    category: distribution
+    source_url: ""
+  - name: Production
+    category: manufacturing
+    source_url: ""
+  - name: Retail Dispensary
+    category: retail
+    source_url: ""
+  - name: Consumption Lounge
+    category: consumption
+    source_url: ""
+
+taxes:
+  - name: Cannabis excise tax
+    applies_to: ""
+    rate: ""
+    source_url: ""
+    notes: ""
+
+active_licenses:
+  total: null
+  as_of: ""
+  source_url: ""
+  by_type: []
+
+official_sources:
+  - title: ""
+    type: ""
+    url: ""
+    notes: ""
+
+notes:
+  - "Initial MOBY Atlas dossier placeholder."
