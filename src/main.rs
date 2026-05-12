@@ -197,7 +197,7 @@ fn show_state(state: &str, data_dir: &Path) -> Result<()> {
 fn validate_states(data_dir: &Path) -> Result<()> {
     let dossiers = load_all_dossiers(data_dir)?;
 
-    let expected_states = ["PA", "MA", "MD", "MI", "WV", "OR", "NV", "CA", "NY", "CO"];
+    let expected_states = ["PA", "MA", "MD", "MI", "WV", "OR", "NV", "CA", "NY", "CO", "ME"];
 
     let found: Vec<String> = dossiers
         .iter()

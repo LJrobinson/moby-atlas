@@ -1,0 +1,181 @@
+state:
+  name: Maine
+  abbreviation: ME
+
+programs:
+  medical:
+    status: active
+    started_year: 1999
+  adult_use:
+    status: active
+    started_year: 2016
+
+regulatory_bodies:
+  - name: Maine Office of Cannabis Policy
+    type: cannabis_regulator
+    website: "https://www.maine.gov/dafs/ocp/"
+    notes: "The Maine Office of Cannabis Policy regulates Maine's medical and adult-use cannabis programs."
+
+track_and_trace:
+  system: Metrc
+  status: active
+  source_url: "https://www.maine.gov/dafs/ocp/adult-use/application-process/establishment-application-instructions"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: medium
+  notes: "Maine adult-use establishment application instructions require proof of registration with the tracking system. Vendor source should be verified with direct OCP/Metrc documentation before marking high confidence."
+
+license_types:
+  - name: Cultivation Facility
+    category: cultivation
+    source_url: "https://legislature.maine.gov/doc/10093"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Products Manufacturing Facility
+    category: manufacturing
+    source_url: "https://legislature.maine.gov/doc/10093"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Cannabis Store
+    category: retail
+    source_url: "https://legislature.maine.gov/doc/10093"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Testing Facility
+    category: testing_lab
+    source_url: "https://legislature.maine.gov/doc/10093"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Sample Collector
+    category: sample_collection
+    source_url: "https://www.maine.gov/dafs/ocp/sites/maine.gov.dafs.ocp/files/inline-files/18-691-CMR-Ch1%2009-08-22.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Nursery Cultivation Facility
+    category: cultivation
+    source_url: "https://www.maine.gov/dafs/ocp/sites/maine.gov.dafs.ocp/files/inline-files/18-691-CMR-Ch1%2009-08-22.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+
+taxes:
+  - name: Adult-Use Cannabis Sales Tax
+    applies_to: "Retail sales of adult-use cannabis and adult-use cannabis products"
+    rate: "14%"
+    source_url: "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/IB61%20FINAL%20Sales%20of%20Adult%20Use%20Cannabis_2025_12_22.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Maine Revenue Services issued 2025 guidance on sales of adult-use cannabis. The rate should be re-verified against current official MRS rate tables before marking final."
+  - name: Adult-Use Cannabis Excise Tax
+    applies_to: "Adult-use cannabis transfers/sales subject to Maine cannabis excise tax"
+    rate: "varies by product/unit"
+    source_url: "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/CannabisExciseJan2026_0.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Maine Revenue Services 2026 cannabis excise return includes per-unit excise tax lines for flower, trim, mature plants, seedlings, immature plants, and seeds."
+  - name: Cannabis Excise Tax Changes
+    applies_to: "Adult-use cannabis excise tax rates and taxable transfers"
+    rate: "updated 2026"
+    source_url: "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/GIB%20115_FINAL_2025_10_17_0.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Maine Revenue Services General Information Bulletin 115 states cannabis excise tax rates were reduced and certain transfers to cultivation facility licensees are not subject to tax."
+  - name: Medical Cannabis Tax
+    applies_to: "Medical cannabis sales"
+    rate: ""
+    source_url: "https://www.maine.gov/revenue/"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: unknown
+    notes: "Medical cannabis tax treatment should be verified against current Maine Revenue Services guidance before finalizing."
+
+active_licenses:
+  total: null
+  as_of: ""
+  source_url: "https://www11.maine.gov/dafs/ocp/open-data/adult-use/licensee-search"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
+  by_type: []
+
+official_sources:
+  - title: Maine Office of Cannabis Policy
+    type: regulator_homepage
+    url: "https://www.maine.gov/dafs/ocp/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary cannabis regulator for Maine."
+  - title: Maine Adult Use Applications and Forms
+    type: license_application_reference
+    url: "https://www.maine.gov/dafs/ocp/adult-use/applications-forms"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OCP adult-use applications and forms page."
+  - title: Maine Adult Use Application Process
+    type: license_application_reference
+    url: "https://www.maine.gov/dafs/ocp/adult-use/application-process"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OCP application process page."
+  - title: Maine Adult Use Establishment Application Instructions
+    type: track_and_trace_reference
+    url: "https://www.maine.gov/dafs/ocp/adult-use/application-process/establishment-application-instructions"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official OCP instructions requiring proof of registration with the tracking system."
+  - title: Maine Adult Use Licensee Search
+    type: active_license_list
+    url: "https://www11.maine.gov/dafs/ocp/open-data/adult-use/licensee-search"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OCP applicant/licensee search tool."
+  - title: Maine Adult Use Cannabis Program Rule
+    type: statute_or_regulation
+    url: "https://www.maine.gov/dafs/ocp/sites/maine.gov.dafs.ocp/files/inline-files/18-691-CMR-Ch1%2009-08-22.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official adult-use cannabis program rule."
+  - title: Maine Adult Use Cannabis Program Report
+    type: license_type_reference
+    url: "https://legislature.maine.gov/doc/10093"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official report stating OCP licenses cultivation facilities, products manufacturing facilities, cannabis stores, and testing facilities."
+  - title: Maine Revenue Services Cannabis Excise Return
+    type: tax_reference
+    url: "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/CannabisExciseJan2026_0.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official 2026 Maine cannabis excise return."
+  - title: Maine Revenue Services General Information Bulletin 115
+    type: tax_reference
+    url: "https://www.maine.gov/revenue/sites/maine.gov.revenue/files/inline-files/GIB%20115_FINAL_2025_10_17_0.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official MRS 2025 tax bulletin including cannabis excise tax changes."
+
+notes:
+  - "Initial real Maine dossier."
+  - "Maine is modeled as medical plus adult-use."
+  - "Medical started_year uses Maine medical cannabis legalization year, 1999."
+  - "Adult-use started_year uses adult-use legalization vote year, 2016; adult-use retail sales began later."
+  - "Track-and-trace is marked Metrc only at medium confidence until direct OCP/Metrc vendor confirmation is added."
+  - "Adult-use sales tax rate should be re-verified against current MRS tables before marking final."
+  - "Active license totals still need extraction from OCP licensee search."

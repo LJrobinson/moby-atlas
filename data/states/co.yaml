@@ -4,62 +4,211 @@ state:
 
 programs:
   medical:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2000
   adult_use:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2012
 
 regulatory_bodies:
-  - name: ""
-    type: ""
-    website: ""
-    notes: ""
+  - name: Colorado Marijuana Enforcement Division
+    type: cannabis_regulator
+    website: "https://sbg.colorado.gov/marijuana-enforcement"
+    notes: "The Colorado Marijuana Enforcement Division is part of the Colorado Department of Revenue and regulates the state's medical and retail marijuana industries."
 
 track_and_trace:
-  system: ""
-  status: unknown
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
-  notes: ""
+  system: Metrc
+  status: active
+  source_url: "https://www.metrc.com/partner/colorado/"
+  source_quality: official_vendor
+  last_checked: 2026-05-12
+  confidence: medium
+  notes: "Colorado is generally treated as a Metrc state. Current official MED source should be verified directly before marking this as regulator-confirmed."
 
 license_types:
-  - name: ""
-    category: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
+  - name: Medical Marijuana Store
+    category: retail
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Medical Marijuana Products Manufacturer
+    category: manufacturing
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Medical Marijuana Cultivation Facility
+    category: cultivation
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Medical Marijuana Testing Facility
+    category: testing_lab
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Medical Marijuana Transporter
+    category: distribution
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Medical Marijuana Business Operator
+    category: operator
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Marijuana Research and Development Facility
+    category: research
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Retail Marijuana Store
+    category: retail
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Retail Marijuana Products Manufacturer
+    category: manufacturing
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Retail Marijuana Cultivation Facility
+    category: cultivation
+    source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Retail Marijuana Testing Facility
+    category: testing_lab
+    source_url: "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6821"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Retail Marijuana Transporter
+    category: distribution
+    source_url: "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6821"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Retail Marijuana Hospitality Business
+    category: consumption
+    source_url: "https://tax.colorado.gov/marijuana-sales-tax-license-requirements"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Retail Marijuana Hospitality and Sales Business
+    category: consumption
+    source_url: "https://tax.colorado.gov/marijuana-sales-tax-license-requirements"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: medium
 
 taxes:
-  - name: ""
-    applies_to: ""
-    rate: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - name: State Retail Marijuana Excise Tax
+    applies_to: "First sale or transfer from a retail marijuana cultivation facility to a retail marijuana store or retail marijuana product manufacturing facility"
+    rate: "15%"
+    source_url: "https://tax.colorado.gov/marijuana-excise-tax"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Colorado Department of Revenue states medical marijuana is not subject to this excise tax."
+  - name: State Retail Marijuana Sales Tax
+    applies_to: "Retail marijuana sold in stores"
+    rate: "15%"
+    source_url: "https://cdor.colorado.gov/data-and-reports/marijuana-data/marijuana-tax-reports"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Colorado marijuana tax reports identify state retail marijuana sales tax at 15%."
+  - name: State Sales Tax
+    applies_to: "Marijuana sold in stores where applicable"
+    rate: "2.9%"
+    source_url: "https://cdor.colorado.gov/data-and-reports/marijuana-data/marijuana-tax-reports"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Colorado marijuana tax reports identify state sales tax revenue at 2.9% on marijuana sold in stores."
+  - name: Local Marijuana Taxes
+    applies_to: "Local marijuana sales or business activity where imposed by local jurisdiction"
+    rate: "varies"
+    source_url: "https://tax.colorado.gov/marijuana-sales-tax"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Local tax treatment varies by jurisdiction; verify using Colorado tax rate publications and local rules."
 
 active_licenses:
   total: null
-  as_of: ""
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
+  as_of: "live lookup"
+  source_url: "https://codor.mylicense.com/MED_Verification/"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - title: Colorado Marijuana Enforcement Division
+    type: regulator_homepage
+    url: "https://sbg.colorado.gov/marijuana-enforcement"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary state marijuana regulator for Colorado."
+  - title: Colorado MED Public License Lookup
+    type: active_license_list
+    url: "https://codor.mylicense.com/MED_Verification/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official MED public lookup for marijuana license verification."
+  - title: Colorado Marijuana Excise Tax
+    type: tax_reference
+    url: "https://tax.colorado.gov/marijuana-excise-tax"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Colorado Department of Revenue marijuana excise tax reference."
+  - title: Colorado Marijuana Tax Reports
+    type: tax_reference
+    url: "https://cdor.colorado.gov/data-and-reports/marijuana-data/marijuana-tax-reports"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official marijuana tax report page showing state marijuana tax and fee revenue categories."
+  - title: Colorado Marijuana Sales Tax
+    type: tax_reference
+    url: "https://tax.colorado.gov/marijuana-sales-tax"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Colorado sales tax guidance for marijuana businesses."
+  - title: Colorado Marijuana Fee Rules
+    type: license_type_reference
+    url: "https://sbg.colorado.gov/sites/sbg/files/documents/230629%201%20CCR%20212-3%20Fee%20Rules_Final.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official fee rules PDF listing multiple medical and retail marijuana business license types."
+  - title: Colorado Retail Marijuana Rules
+    type: statute_or_regulation
+    url: "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6821"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official Colorado Secretary of State rule PDF for retail marijuana rules."
 
 notes:
-  - "Initial MOBY Atlas placeholder dossier."
+  - "Initial real Colorado dossier."
+  - "Colorado is modeled as medical plus adult-use."
+  - "Medical started_year uses Amendment 20 year, 2000."
+  - "Adult-use started_year uses Amendment 64 year, 2012; adult-use retail sales began later."
+  - "Track-and-trace is marked Metrc with medium confidence until an official regulator page is added to the dossier as the direct source."
+  - "Active license total should be extracted from MED public lookup or official downloadable license data if available."

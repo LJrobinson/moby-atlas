@@ -4,62 +4,132 @@ state:
 
 programs:
   medical:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2016
   adult_use:
-    status: unknown
+    status: not_legal
     started_year: null
 
 regulatory_bodies:
-  - name: ""
-    type: ""
-    website: ""
-    notes: ""
+  - name: Pennsylvania Department of Health Office of Medical Marijuana
+    type: cannabis_regulator
+    website: "https://www.pa.gov/agencies/health/programs/medical-marijuana"
+    notes: "Pennsylvania's medical marijuana program is administered through the Department of Health Office of Medical Marijuana."
 
 track_and_trace:
-  system: ""
-  status: unknown
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
-  notes: ""
+  system: Electronic Tracking System
+  status: active
+  source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
+  notes: "Pennsylvania's Medical Marijuana Act requires program data to be maintained electronically, including through an electronic tracking system for all phases of medical marijuana from seed to sale. Current vendor name should be verified separately before naming a platform."
 
 license_types:
-  - name: ""
-    category: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
+  - name: Grower/Processor
+    category: manufacturing
+    source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/growers-processors"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Dispensary
+    category: retail
+    source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/dispensaries"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Approved Laboratory
+    category: testing_lab
+    source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/laboratories"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Clinical Registrant
+    category: research
+    source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/clinical-research"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Academic Clinical Research Center
+    category: research
+    source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/clinical-research"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
 
 taxes:
-  - name: ""
-    applies_to: ""
+  - name: Medical Marijuana Gross Receipts Tax
+    applies_to: "Gross receipts from the sale of medical marijuana by a grower/processor to a dispensary"
+    rate: "5%"
+    source_url: "https://www.pa.gov/agencies/revenue/resources/tax-types-and-information/medical-marijuana-tax"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Growers/processors and clinical registrant growers/processors must file quarterly medical marijuana gross receipts tax returns."
+  - name: Adult-Use Cannabis Tax
+    applies_to: "Adult-use cannabis sales"
     rate: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+    source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Pennsylvania does not currently have an active adult-use cannabis program in this dossier."
 
 active_licenses:
   total: null
   as_of: ""
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
+  source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: medium
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - title: Pennsylvania Medical Marijuana Program
+    type: regulator_homepage
+    url: "https://www.pa.gov/agencies/health/programs/medical-marijuana"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary official source for Pennsylvania medical marijuana program information."
+  - title: Pennsylvania Medical Marijuana Tax
+    type: tax_reference
+    url: "https://www.pa.gov/agencies/revenue/resources/tax-types-and-information/medical-marijuana-tax"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Department of Revenue source for Pennsylvania medical marijuana gross receipts tax."
+  - title: Pennsylvania Growers/Processors
+    type: license_type_reference
+    url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/growers-processors"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official grower/processor program page."
+  - title: Pennsylvania Dispensaries
+    type: license_type_reference
+    url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/dispensaries"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official dispensary program page."
+  - title: Pennsylvania Laboratories
+    type: license_type_reference
+    url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/laboratories"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official approved laboratory program page."
+  - title: Pennsylvania Medical Marijuana Act
+    type: statute
+    url: "https://www.palegis.us/statutes/unconsolidated/law-information/view-statute?actnum=16&sessind=0&sessyr=2016&txttype=htm"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Act 16 of 2016 established Pennsylvania's medical marijuana program."
 
 notes:
-  - "Initial MOBY Atlas placeholder dossier."
+  - "Initial real Pennsylvania dossier."
+  - "Pennsylvania is modeled as medical-only with adult-use marked not_legal."
+  - "Track-and-trace is intentionally labeled generically as Electronic Tracking System until current vendor/source is verified."
+  - "Active license totals still need to be extracted from official DOH permittee/location lists."

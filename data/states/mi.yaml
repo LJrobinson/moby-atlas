@@ -4,62 +4,184 @@ state:
 
 programs:
   medical:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2008
   adult_use:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2018
 
 regulatory_bodies:
-  - name: ""
-    type: ""
-    website: ""
-    notes: ""
+  - name: Michigan Cannabis Regulatory Agency
+    type: cannabis_regulator
+    website: "https://www.michigan.gov/cra"
+    notes: "The Cannabis Regulatory Agency regulates Michigan's adult-use and medical marijuana programs."
 
 track_and_trace:
-  system: ""
-  status: unknown
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
-  notes: ""
+  system: Metrc
+  status: active
+  source_url: "https://www.michigan.gov/cra/resources/statewide-monitoring-system-information-metrc"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
+  notes: "Michigan CRA identifies Metrc as Michigan's statewide seed-to-sale marijuana tracking system."
 
 license_types:
-  - name: ""
-    category: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
+  - name: Class A Marijuana Grower
+    category: cultivation
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Class B Marijuana Grower
+    category: cultivation
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Class C Marijuana Grower
+    category: cultivation
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Excess Marijuana Grower
+    category: cultivation
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Processor
+    category: manufacturing
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Retailer
+    category: retail
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Secure Transporter
+    category: distribution
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Safety Compliance Facility
+    category: testing_lab
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Marijuana Microbusiness
+    category: microbusiness
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Class A Marijuana Microbusiness
+    category: microbusiness
+    source_url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Provisioning Center
+    category: retail
+    source_url: "https://www.michigan.gov/cra/-/media/Project/Websites/cra/MMFL-Paper-Applications-Forms-and-Resources/Step-1-Paper-Applications/AEPA/License_Types__Descriptions_689473_7.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Secure Transporter
+    category: distribution
+    source_url: "https://www.michigan.gov/cra/-/media/Project/Websites/cra/MMFL-Paper-Applications-Forms-and-Resources/Step-1-Paper-Applications/AEPA/License_Types__Descriptions_689473_7.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
 
 taxes:
-  - name: ""
-    applies_to: ""
-    rate: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - name: Marijuana Retailers Excise Tax
+    applies_to: "Adult-use retail marijuana sales"
+    rate: "10%"
+    source_url: "https://www.michigan.gov/taxes/business-taxes/mret/about"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Michigan Treasury states MRTMA imposes a 10% excise tax on retail marijuana sales in addition to 6% sales tax."
+  - name: State Sales Tax
+    applies_to: "Adult-use retail marijuana sales"
+    rate: "6%"
+    source_url: "https://www.michigan.gov/taxes/business-taxes/mret/about"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Michigan Treasury administers both the 10% MRE tax and 6% sales tax."
+  - name: Adult-Use Wholesale Marijuana Tax
+    applies_to: "Adult-use marijuana wholesale transactions"
+    rate: "24%"
+    source_url: "https://tax.thomsonreuters.com/news/michigan-issues-additional-guidance-on-wholesale-tax-on-adult-use-marihuana/"
+    source_quality: secondary_source
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Included as a current-risk note based on secondary reporting; replace with official Michigan Treasury guidance when located."
 
 active_licenses:
   total: null
   as_of: ""
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
+  source_url: "https://www.michigan.gov/cra/sections/reports-and-legal"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: medium
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - title: Michigan Cannabis Regulatory Agency
+    type: regulator_homepage
+    url: "https://www.michigan.gov/cra"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary state cannabis regulator for Michigan."
+  - title: Michigan Statewide Marijuana Monitoring System Information - Metrc
+    type: track_and_trace_reference
+    url: "https://www.michigan.gov/cra/resources/statewide-monitoring-system-information-metrc"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official CRA Metrc reference."
+  - title: Michigan Adult-Use License Fees and License Types
+    type: license_type_reference
+    url: "https://www.michigan.gov/cra/faq/rec-use-accordion/fees/what-is-the-cost-of-applying-for-an-adult-use-marijuana-establishment-license"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official CRA page listing adult-use license types through fee schedule."
+  - title: Michigan Medical Marihuana Facility License Types
+    type: license_type_reference
+    url: "https://www.michigan.gov/cra/-/media/Project/Websites/cra/MMFL-Paper-Applications-Forms-and-Resources/Step-1-Paper-Applications/AEPA/License_Types__Descriptions_689473_7.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official CRA PDF for medical marihuana facility license types and descriptions."
+  - title: Michigan Marijuana Retailers Excise Tax
+    type: tax_reference
+    url: "https://www.michigan.gov/taxes/business-taxes/mret/about"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Michigan Treasury page for 10% MRE tax and 6% sales tax."
+  - title: Michigan Cannabis Reports and Legal
+    type: active_license_list
+    url: "https://www.michigan.gov/cra/sections/reports-and-legal"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official CRA reports page; active license counts may be available through monthly statistical reports."
 
 notes:
-  - "Initial MOBY Atlas placeholder dossier."
+  - "Initial real Michigan dossier."
+  - "Michigan is modeled as medical plus adult-use."
+  - "Medical started_year uses Michigan Medical Marihuana Act year, 2008."
+  - "Adult-use started_year uses MRTMA voter approval year, 2018."
+  - "The 24% adult-use wholesale marijuana tax is included as a medium-confidence secondary-source note until official Treasury guidance is linked."
+  - "Active license totals still need to be extracted from CRA monthly reports or license verification data."

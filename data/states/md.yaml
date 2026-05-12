@@ -4,62 +4,171 @@ state:
 
 programs:
   medical:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2014
   adult_use:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2023
 
 regulatory_bodies:
-  - name: ""
-    type: ""
-    website: ""
-    notes: ""
+  - name: Maryland Cannabis Administration
+    type: cannabis_regulator
+    website: "https://cannabis.maryland.gov/Pages/home.aspx"
+    notes: "The Maryland Cannabis Administration regulates Maryland's medical and adult-use cannabis programs."
 
 track_and_trace:
-  system: ""
-  status: unknown
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
-  notes: ""
+  system: Metrc
+  status: active
+  source_url: "https://cannabis.maryland.gov/Documents/2025_Laws_and_Regulations/Micro-Dispensary/WEBSITE%20Copy%20of%20Micro%20Dispensary%20Guidance%2010.31.pdf"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
+  notes: "Maryland Cannabis Administration guidance identifies METRC as MCA's seed-to-sale tracking system."
 
 license_types:
-  - name: ""
-    category: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
+  - name: Standard Grower
+    category: cultivation
+    source_url: "https://cannabis.maryland.gov/documents/2024_laws_and_regulations/comar%2014.17.01-.22%204.3%20watermarked.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Standard Processor
+    category: manufacturing
+    source_url: "https://cannabis.maryland.gov/documents/2024_laws_and_regulations/comar%2014.17.01-.22%204.3%20watermarked.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Standard Dispensary
+    category: retail
+    source_url: "https://cannabis.maryland.gov/documents/2024_laws_and_regulations/comar%2014.17.01-.22%204.3%20watermarked.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Micro Grower
+    category: cultivation
+    source_url: "https://cannabis.maryland.gov/documents/2024_laws_and_regulations/comar%2014.17.01-.22%204.3%20watermarked.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Micro Processor
+    category: manufacturing
+    source_url: "https://cannabis.maryland.gov/documents/2024_laws_and_regulations/comar%2014.17.01-.22%204.3%20watermarked.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Micro Dispensary
+    category: retail
+    source_url: "https://cannabis.maryland.gov/documents/2024_laws_and_regulations/comar%2014.17.01-.22%204.3%20watermarked.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+  - name: On-Site Consumption Establishment
+    category: consumption
+    source_url: "https://cannabis.maryland.gov/Documents/2023%20_pdf_files/laws%20and%20regulations/issue%2014%20%2807-14-2023%29%20%281%29.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Incubator Space
+    category: incubator
+    source_url: "https://cannabis.maryland.gov/Documents/2023%20_pdf_files/laws%20and%20regulations/issue%2014%20%2807-14-2023%29%20%281%29.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Independent Testing Laboratory
+    category: testing_lab
+    source_url: "https://cannabis.maryland.gov/Documents/2024_Laws_and_Regulations/Cannabis%20Policy%20FAQs_091024.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Transporter Business
+    category: distribution
+    source_url: "https://cannabis.maryland.gov/Documents/2024_Laws_and_Regulations/Cannabis%20Policy%20FAQs_091024.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
 
 taxes:
-  - name: ""
-    applies_to: ""
-    rate: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - name: Adult-Use Cannabis Sales and Use Tax
+    applies_to: "Retail sales of adult-use cannabis and adult-use cannabis products"
+    rate: "12%"
+    source_url: "https://www.marylandcomptroller.gov/content/dam/mdcomp/md/media/2025/12-22-2025-maryland-collects-26-million-in-cannabis-tax-revenue-july-through-september-2025.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Maryland Comptroller release states the adult-use cannabis sales and use tax increased from 9% to 12% on July 1, 2025."
+  - name: Medical Cannabis Sales Tax
+    applies_to: "Sales to registered medical cannabis patients"
+    rate: "0%"
+    source_url: "https://www.marylandcomptroller.gov/cannabis.html"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Maryland adult-use cannabis tax guidance applies to adult-use retail sales; medical cannabis taxation should be verified separately before finalizing."
 
 active_licenses:
   total: null
   as_of: ""
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
+  source_url: "https://cannabis.maryland.gov/Pages/Data-Dashboard.aspx"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: medium
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - title: Maryland Cannabis Administration
+    type: regulator_homepage
+    url: "https://cannabis.maryland.gov/Pages/home.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary state cannabis regulator for Maryland."
+  - title: Maryland Industry Licensees and Registrants
+    type: license_type_reference
+    url: "https://cannabis.maryland.gov/pages/industry_licensees_and_registrants.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official MCA industry licensee and registrant page."
+  - title: Maryland Cannabis Regulations COMAR 14.17
+    type: statute_or_regulation
+    url: "https://cannabis.maryland.gov/documents/2024_laws_and_regulations/comar%2014.17.01-.22%204.3%20watermarked.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official COMAR cannabis regulatory reference."
+  - title: Maryland Adult Use Cannabis Information
+    type: tax_reference
+    url: "https://www.marylandcomptroller.gov/cannabis.html"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official Comptroller adult-use cannabis tax information page; page text may lag newer rate changes."
+  - title: Maryland Cannabis Tax Revenue Release
+    type: tax_reference
+    url: "https://www.marylandcomptroller.gov/content/dam/mdcomp/md/media/2025/12-22-2025-maryland-collects-26-million-in-cannabis-tax-revenue-july-through-september-2025.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Comptroller release documenting the 12% adult-use cannabis tax rate effective July 1, 2025."
+  - title: Maryland Micro Dispensary Guidance
+    type: track_and_trace_reference
+    url: "https://cannabis.maryland.gov/Documents/2025_Laws_and_Regulations/Micro-Dispensary/WEBSITE%20Copy%20of%20Micro%20Dispensary%20Guidance%2010.31.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "MCA guidance identifying METRC as the seed-to-sale tracking system."
+  - title: Maryland Cannabis Data Dashboard
+    type: active_license_list
+    url: "https://cannabis.maryland.gov/Pages/Data-Dashboard.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official MCA data dashboard; active license counts still need extraction."
 
 notes:
-  - "Initial MOBY Atlas placeholder dossier."
+  - "Initial real Maryland dossier."
+  - "Maryland is modeled as medical plus adult-use."
+  - "Medical started_year uses original medical cannabis program law period; verify if using first operational sales instead."
+  - "Adult-use started_year uses July 1, 2023 adult-use sales launch."
+  - "Adult-use tax updated to 12% based on official 2025 Comptroller release."
+  - "Active license totals still need to be extracted from the official MCA dashboard."

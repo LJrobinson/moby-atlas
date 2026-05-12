@@ -4,62 +4,135 @@ state:
 
 programs:
   medical:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2017
   adult_use:
-    status: unknown
+    status: not_legal
     started_year: null
 
 regulatory_bodies:
-  - name: ""
-    type: ""
-    website: ""
-    notes: ""
+  - name: West Virginia Office of Medical Cannabis
+    type: cannabis_regulator
+    website: "https://omc.wv.gov/"
+    notes: "The West Virginia Office of Medical Cannabis administers the state's medical cannabis program."
 
 track_and_trace:
-  system: ""
-  status: unknown
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
-  notes: ""
+  system: Metrc
+  status: active
+  source_url: "https://www.metrc.com/faq/west-virginia-faq/"
+  source_quality: official_vendor
+  last_checked: 2026-05-12
+  confidence: medium
+  notes: "Metrc's West Virginia FAQ states licensees must use Metrc to track cannabis plants and products. Replace with direct OMC source if located."
 
 license_types:
-  - name: ""
-    category: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
+  - name: Grower
+    category: cultivation
+    source_url: "https://omc.wv.gov/industry/application/Pages/default.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Processor
+    category: manufacturing
+    source_url: "https://omc.wv.gov/industry/application/Pages/default.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Dispensary
+    category: retail
+    source_url: "https://omc.wv.gov/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Medical Cannabis Laboratory
+    category: testing_lab
+    source_url: "https://omc.wv.gov/industry/application/Pages/default.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
 
 taxes:
-  - name: ""
-    applies_to: ""
+  - name: Medical Cannabis Tax
+    applies_to: "Gross receipts from medical cannabis sales received or accrued by dispensaries during the reporting period"
+    rate: "10%"
+    source_url: "https://code.wvlegislature.gov/16A-9-1/"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "West Virginia Code §16A-9-1 states the tax rate is 10% of gross receipts received or accrued by the dispensary during the reporting period."
+  - name: Cannabis Dispensary Tax
+    applies_to: "Gross receipts received or accrued on medical cannabis by permitted medical cannabis dispensaries"
+    rate: "10%"
+    source_url: "https://tax.wv.gov/business/excisetax/pages/excisetax.aspx"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "West Virginia Tax Division identifies Cannabis Dispensary Tax as a 10% quarterly tax on medical cannabis gross receipts."
+  - name: Adult-Use Cannabis Tax
+    applies_to: "Adult-use cannabis sales"
     rate: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+    source_url: "https://omc.wv.gov/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "West Virginia does not currently have an active adult-use cannabis program in this dossier."
 
 active_licenses:
   total: null
   as_of: ""
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
+  source_url: "https://omc.wv.gov/"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: medium
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - title: West Virginia Office of Medical Cannabis
+    type: regulator_homepage
+    url: "https://omc.wv.gov/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary official source for West Virginia medical cannabis program information."
+  - title: West Virginia Industry Applications
+    type: license_type_reference
+    url: "https://omc.wv.gov/industry/application/Pages/default.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official OMC application page referencing medical cannabis laboratory application and industry application resources."
+  - title: West Virginia Medical Cannabis Act Rules
+    type: statute_or_regulation
+    url: "https://omc.wv.gov/rules/Pages/default.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OMC rules page linking the Medical Cannabis Act and legislative rules."
+  - title: West Virginia Code §16A-9-1
+    type: tax_reference
+    url: "https://code.wvlegislature.gov/16A-9-1/"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official statutory source for West Virginia medical cannabis tax."
+  - title: West Virginia Tax Division Excise Tax
+    type: tax_reference
+    url: "https://tax.wv.gov/business/excisetax/pages/excisetax.aspx"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Tax Division page for Cannabis Dispensary Tax."
+  - title: West Virginia Metrc FAQ
+    type: track_and_trace_reference
+    url: "https://www.metrc.com/faq/west-virginia-faq/"
+    source_quality: official_vendor
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Metrc vendor FAQ for West Virginia tracking requirements."
 
 notes:
-  - "Initial MOBY Atlas placeholder dossier."
+  - "Initial real West Virginia dossier."
+  - "West Virginia is modeled as medical-only with adult-use marked not_legal."
+  - "Medical started_year uses West Virginia Medical Cannabis Act enactment year, 2017."
+  - "Track-and-trace is marked Metrc with medium confidence because the current linked source is vendor-provided rather than direct OMC text."
+  - "Active license totals still need extraction from official OMC license/location resources."

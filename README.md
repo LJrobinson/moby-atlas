@@ -38,6 +38,7 @@ Additional states can be added later by creating new state dossier files in `dat
 - List available states
 - Show a state dossier as JSON
 - Validate required initial state coverage
+- Compare two state dossiers with `compare <state> <state>`
 
 ## Planned Features
 
@@ -82,6 +83,12 @@ Validate required state coverage:
 
 ```bash
 cargo run -- validate
+```
+
+Compare two states: `compare <state> <state>`
+
+```bash
+cargo run -- compare nv ma
 ```
 
 ## Data Philosophy

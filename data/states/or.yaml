@@ -4,62 +4,164 @@ state:
 
 programs:
   medical:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 1998
   adult_use:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2014
 
 regulatory_bodies:
-  - name: ""
-    type: ""
-    website: ""
-    notes: ""
+  - name: Oregon Liquor and Cannabis Commission
+    type: cannabis_regulator
+    website: "https://www.oregon.gov/olcc/marijuana/"
+    notes: "The Oregon Liquor and Cannabis Commission licenses and regulates adult-use marijuana businesses in Oregon."
+  - name: Oregon Health Authority Oregon Medical Marijuana Program
+    type: medical_cannabis_regulator
+    website: "https://www.oregon.gov/oha/ph/diseasesconditions/chronicdisease/medicalmarijuanaprogram/"
+    notes: "The Oregon Health Authority administers the Oregon Medical Marijuana Program."
 
 track_and_trace:
-  system: ""
-  status: unknown
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
-  notes: ""
+  system: Metrc
+  status: active
+  source_url: "https://www.oregon.gov/olcc/marijuana/Documents/CTS/ProductCategorizationGuide.pdf"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
+  notes: "OLCC product categorization guidance references Metrc categories and Oregon's Cannabis Tracking System context."
 
 license_types:
-  - name: ""
-    category: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
+  - name: Producer
+    category: cultivation
+    source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Processor
+    category: manufacturing
+    source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Wholesaler
+    category: distribution
+    source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Retailer
+    category: retail
+    source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Laboratory
+    category: testing_lab
+    source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Research Certificate
+    category: research
+    source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Worker Permit
+    category: worker_permit
+    source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
 
 taxes:
-  - name: ""
-    applies_to: ""
-    rate: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - name: State Recreational Marijuana Tax
+    applies_to: "Recreational marijuana sales by OLCC-licensed retailers"
+    rate: "17%"
+    source_url: "https://www.oregon.gov/dor/programs/businesses/pages/marijuana.aspx"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Oregon DOR states OLCC-licensed retailers must charge a 17% statewide tax on all recreational marijuana sales."
+  - name: Local Marijuana Tax
+    applies_to: "Recreational marijuana sales in cities or counties with voter-approved local tax"
+    rate: "up to 3%"
+    source_url: "https://www.oregon.gov/dor/programs/businesses/pages/marijuana-locality-tax.aspx"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Oregon DOR states cities and counties may add a local tax of up to 3% on recreational marijuana sales with voter approval."
+  - name: Medical Marijuana Sales Tax
+    applies_to: "Sales of marijuana items to Oregon Medical Marijuana Program cardholders"
+    rate: "exempt"
+    source_url: "https://www.oregon.gov/cjc/summit/Summit%20Media/ORMarijuanaTax.pdf"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official Oregon tax presentation states sales to OMMP cardholders are exempt from the 17% state marijuana tax."
 
 active_licenses:
   total: null
   as_of: ""
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
+  source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: medium
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - title: Oregon Liquor and Cannabis Commission Marijuana Program
+    type: regulator_homepage
+    url: "https://www.oregon.gov/olcc/marijuana/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary adult-use cannabis regulator for Oregon."
+  - title: Oregon Marijuana Licensing
+    type: license_type_reference
+    url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OLCC marijuana licensing page."
+  - title: Oregon Recreational Marijuana Rules
+    type: statute_or_regulation
+    url: "https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=3873"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Oregon administrative rules for recreational marijuana."
+  - title: Oregon Cannabis Tracking System Product Categorization Guide
+    type: track_and_trace_reference
+    url: "https://www.oregon.gov/olcc/marijuana/Documents/CTS/ProductCategorizationGuide.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OLCC CTS/Metrc product categorization guide."
+  - title: Oregon Marijuana Tax
+    type: tax_reference
+    url: "https://www.oregon.gov/dor/programs/businesses/pages/marijuana.aspx"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Oregon DOR recreational marijuana tax page."
+  - title: Oregon Marijuana Locality Taxes
+    type: tax_reference
+    url: "https://www.oregon.gov/dor/programs/businesses/pages/marijuana-locality-tax.aspx"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official Oregon DOR local marijuana tax page."
+  - title: Oregon Medical Marijuana Program
+    type: medical_program_reference
+    url: "https://www.oregon.gov/oha/ph/diseasesconditions/chronicdisease/medicalmarijuanaprogram/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official Oregon Health Authority medical marijuana program page."
 
 notes:
-  - "Initial MOBY Atlas placeholder dossier."
+  - "Initial real Oregon dossier."
+  - "Oregon is modeled as medical plus adult-use."
+  - "Medical started_year uses Measure 67 / Oregon Medical Marijuana Act year, 1998."
+  - "Adult-use started_year uses Measure 91 approval year, 2014; adult-use sales began later."
+  - "Active license totals still need extraction from OLCC licensing data or official reports."

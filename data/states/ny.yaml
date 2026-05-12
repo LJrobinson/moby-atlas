@@ -4,62 +4,200 @@ state:
 
 programs:
   medical:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2014
   adult_use:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2021
 
 regulatory_bodies:
-  - name: ""
-    type: ""
-    website: ""
-    notes: ""
+  - name: New York Office of Cannabis Management
+    type: cannabis_regulator
+    website: "https://cannabis.ny.gov/"
+    notes: "The Office of Cannabis Management oversees licensure, cultivation, production, distribution, sale, and taxation of medical, adult-use, and cannabinoid hemp within New York State."
 
 track_and_trace:
-  system: ""
-  status: unknown
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
-  notes: ""
+  system: Metrc
+  status: active
+  source_url: "https://cannabis.ny.gov/sts-faqs"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
+  notes: "New York OCM seed-to-sale FAQs identify Metrc as the state's track-and-trace provider."
 
 license_types:
-  - name: ""
-    category: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
+  - name: Adult-Use Cultivator
+    category: cultivation
+    source_url: "https://cannabis.ny.gov/system/files/documents/2024/03/cannabis-management-fact-sheet-adult-use-license_032124.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Adult-Use Processor
+    category: manufacturing
+    source_url: "https://cannabis.ny.gov/system/files/documents/2024/03/cannabis-management-fact-sheet-adult-use-license_032124.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Adult-Use Distributor
+    category: distribution
+    source_url: "https://cannabis.ny.gov/system/files/documents/2024/03/cannabis-management-fact-sheet-adult-use-license_032124.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Adult-Use Retail Dispensary
+    category: retail
+    source_url: "https://cannabis.ny.gov/system/files/documents/2024/03/cannabis-management-fact-sheet-adult-use-license_032124.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Adult-Use Microbusiness
+    category: microbusiness
+    source_url: "https://cannabis.ny.gov/au-microbusiness-license-overview"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Adult-Use Nursery
+    category: cultivation
+    source_url: "https://cannabis.ny.gov/system/files/documents/2022/12/adult-use-cannabis-proposed-regulations.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Adult-Use Cooperative
+    category: cultivation
+    source_url: "https://cannabis.ny.gov/system/files/documents/2022/12/adult-use-cannabis-proposed-regulations.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: On-Site Consumption
+    category: consumption
+    source_url: "https://cannabis.ny.gov/caurd-faq"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Delivery
+    category: delivery
+    source_url: "https://cannabis.ny.gov/caurd-faq"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Registered Organization
+    category: medical_vertical
+    source_url: "https://cannabis.ny.gov/medical-cannabis"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+  - name: Registered Organization Adult-Use Cultivator Processor Distributor Retail Dispensary
+    category: medical_to_adult_use_vertical
+    source_url: "https://cannabis.ny.gov/system/files/documents/2022/12/adult-use-cannabis-proposed-regulations.pdf"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: medium
 
 taxes:
-  - name: ""
-    applies_to: ""
-    rate: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - name: Adult-Use Cannabis Distributor Tax
+    applies_to: "Sale or transfer of adult-use cannabis products by a distributor to an adult-use cannabis products retailer"
+    rate: "9%"
+    source_url: "https://www.tax.ny.gov/bus/auc/"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "New York Tax Department states the 9% distributor tax is effective for sales on and after June 1, 2024."
+  - name: Adult-Use Cannabis Retail Tax
+    applies_to: "Retail sale or transfer of adult-use cannabis products to retail customers"
+    rate: "13%"
+    source_url: "https://www.tax.ny.gov/bus/auc/"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "New York Tax Department states retailers pay retail taxes totaling 13% on adult-use cannabis retail sales or transfers."
+  - name: Adult-Use Cannabis Sales Tax
+    applies_to: "Adult-use cannabis products"
+    rate: "exempt"
+    source_url: "https://www.tax.ny.gov/bus/auc/"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "New York Tax Department states adult-use cannabis products are exempt from sales tax and vapor products tax."
+  - name: Medical Cannabis Excise Tax
+    applies_to: "Gross receipts from medical cannabis sold or furnished to certified patients or designated caregivers"
+    rate: "3.15%"
+    source_url: "https://www.tax.ny.gov/bus/mc/medical-cannabis-tax.htm"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "New York Tax Department states the medical cannabis excise tax rate is 3.15% effective for sales on and after June 1, 2024."
 
 active_licenses:
   total: null
   as_of: ""
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
+  source_url: "https://cannabis.ny.gov/dispensary-location-verification"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: medium
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - title: New York Office of Cannabis Management
+    type: regulator_homepage
+    url: "https://cannabis.ny.gov/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary cannabis regulator for New York."
+  - title: New York Seed-to-Sale Frequently Asked Questions
+    type: track_and_trace_reference
+    url: "https://cannabis.ny.gov/sts-faqs"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OCM seed-to-sale FAQ referencing Metrc as the track-and-trace provider."
+  - title: New York Adult-Use License Types
+    type: license_type_reference
+    url: "https://cannabis.ny.gov/system/files/documents/2024/03/cannabis-management-fact-sheet-adult-use-license_032124.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OCM adult-use license type fact sheet."
+  - title: New York Adult-Use Microbusiness License Overview
+    type: license_type_reference
+    url: "https://cannabis.ny.gov/au-microbusiness-license-overview"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official OCM microbusiness license overview."
+  - title: New York Adult-Use Cannabis Products Tax
+    type: tax_reference
+    url: "https://www.tax.ny.gov/bus/auc/"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official New York Tax Department page for adult-use cannabis distributor and retailer taxes."
+  - title: New York Medical Cannabis Tax
+    type: tax_reference
+    url: "https://www.tax.ny.gov/bus/mc/medical-cannabis-tax.htm"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official New York Tax Department medical cannabis excise tax page."
+  - title: New York Dispensary Location Verification
+    type: active_license_list
+    url: "https://cannabis.ny.gov/dispensary-location-verification"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official OCM dispensary verification resource; broader active license totals still need extraction."
+  - title: New York Office of Cannabis Management 2025 Annual Report
+    type: market_report
+    url: "https://cannabis.ny.gov/system/files/documents/2025/12/ocm-annual-report_final-2025.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "Official OCM annual report with market and licensing context."
 
 notes:
-  - "Initial MOBY Atlas placeholder dossier."
+  - "Initial real New York dossier."
+  - "New York is modeled as medical plus adult-use."
+  - "Medical started_year uses Compassionate Care Act year, 2014."
+  - "Adult-use started_year uses MRTA enactment year, 2021."
+  - "Adult-use tax structure uses New York Tax Department rates effective June 1, 2024."
+  - "Active license totals still need extraction from official OCM resources."

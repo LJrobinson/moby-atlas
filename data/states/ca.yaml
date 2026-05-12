@@ -4,62 +4,168 @@ state:
 
 programs:
   medical:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 1996
   adult_use:
-    status: unknown
-    started_year: null
+    status: active
+    started_year: 2016
 
 regulatory_bodies:
-  - name: ""
-    type: ""
-    website: ""
-    notes: ""
+  - name: California Department of Cannabis Control
+    type: cannabis_regulator
+    website: "https://www.cannabis.ca.gov/"
+    notes: "California's Department of Cannabis Control licenses and regulates commercial cannabis activity in the state."
 
 track_and_trace:
-  system: ""
-  status: unknown
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
-  notes: ""
+  system: CCTT-Metrc
+  status: active
+  source_url: "https://www.metrc.com/partner/california/"
+  source_quality: official_vendor
+  last_checked: 2026-05-12
+  confidence: high
+  notes: "California's cannabis track-and-trace implementation is commonly referred to as CCTT-Metrc. DCC and CDTFA materials also refer to the California Cannabis Track-and-Trace system."
 
 license_types:
-  - name: ""
-    category: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
+  - name: Cultivation
+    category: cultivation
+    source_url: "https://www.cannabis.ca.gov/applicants/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Distribution
+    category: distribution
+    source_url: "https://www.cannabis.ca.gov/applicants/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Manufacturing
+    category: manufacturing
+    source_url: "https://www.cannabis.ca.gov/applicants/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Testing Laboratory
+    category: testing_lab
+    source_url: "https://www.cannabis.ca.gov/applicants/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Retail
+    category: retail
+    source_url: "https://www.cannabis.ca.gov/applicants/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Event Organizer
+    category: event
+    source_url: "https://www.cannabis.ca.gov/applicants/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+  - name: Microbusiness
+    category: microbusiness
+    source_url: "https://www.cannabis.ca.gov/applicants/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
 
 taxes:
-  - name: ""
-    applies_to: ""
-    rate: ""
-    source_url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - name: Cannabis Excise Tax
+    applies_to: "Gross receipts from the retail sale of cannabis or cannabis products"
+    rate: "15%"
+    source_url: "https://cdtfa.ca.gov/taxes-and-fees/special-taxes-and-fees-tax-rates/"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "CDTFA lists the cannabis excise tax at 15% effective October 1, 2025, after a temporary 19% period from July 1, 2025 through September 30, 2025."
+  - name: State Sales and Use Tax
+    applies_to: "Retail sales of cannabis and cannabis products, unless a specific exemption applies"
+    rate: "varies"
+    source_url: "https://cdtfa.ca.gov/industry/cannabis/tax-facts.htm"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Cannabis retailers generally must collect applicable sales and use tax in addition to cannabis excise tax."
+  - name: Local Cannabis Business Taxes
+    applies_to: "Local cannabis business activity where adopted by city or county"
+    rate: "varies"
+    source_url: "https://www.cannabis.ca.gov/resources/local-jurisdictions/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: medium
+    notes: "California local jurisdictions may impose local cannabis business taxes or other local requirements. Rates vary by locality."
+  - name: Cultivation Tax
+    applies_to: "Historical cannabis cultivation tax"
+    rate: "ended"
+    source_url: "https://cdtfa.ca.gov/taxes-and-fees/special-taxes-and-fees-tax-rates/"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "CDTFA states the cultivation tax ended effective July 1, 2022 under AB 195."
 
 active_licenses:
   total: null
-  as_of: ""
-  source_url: ""
-  source_quality: unknown
-  last_checked: ""
-  confidence: unknown
+  as_of: "daily"
+  source_url: "https://www.cannabis.ca.gov/resources/search-for-licensed-business/"
+  source_quality: official_regulator
+  last_checked: 2026-05-12
+  confidence: high
   by_type: []
 
 official_sources:
-  - title: ""
-    type: ""
-    url: ""
-    source_quality: unknown
-    last_checked: ""
-    confidence: unknown
-    notes: ""
+  - title: California Department of Cannabis Control
+    type: regulator_homepage
+    url: "https://www.cannabis.ca.gov/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Primary state cannabis regulator for California."
+  - title: California Cannabis License Types
+    type: license_type_reference
+    url: "https://www.cannabis.ca.gov/applicants/license-types/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official DCC license type reference."
+  - title: California Cannabis License Search
+    type: active_license_list
+    url: "https://www.cannabis.ca.gov/resources/search-for-licensed-business/"
+    source_quality: official_regulator
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "DCC says the license search tool is updated daily and includes businesses licensed by DCC."
+  - title: California Cannabis Tax Rates
+    type: tax_reference
+    url: "https://cdtfa.ca.gov/taxes-and-fees/special-taxes-and-fees-tax-rates/"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official CDTFA special taxes and fees rate page."
+  - title: California Cannabis Tax Facts
+    type: tax_reference
+    url: "https://cdtfa.ca.gov/industry/cannabis/tax-facts.htm"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official CDTFA cannabis tax guidance for businesses."
+  - title: California Metrc
+    type: track_and_trace_reference
+    url: "https://www.metrc.com/partner/california/"
+    source_quality: official_vendor
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Metrc California partner page describing California's selected track-and-trace system."
+  - title: California Proposition 64
+    type: statute_or_ballot_reference
+    url: "https://courts.ca.gov/programs-initiatives/criminal-justice-services/proposition-64-adult-use-marijuana-act"
+    source_quality: official_statute_or_regulation
+    last_checked: 2026-05-12
+    confidence: high
+    notes: "Official California Courts overview of Proposition 64, effective November 9, 2016."
 
 notes:
-  - "Initial MOBY Atlas placeholder dossier."
+  - "Initial real California dossier."
+  - "California is modeled as medical plus adult-use."
+  - "Medical started_year uses Proposition 215 year, 1996."
+  - "Adult-use started_year uses Proposition 64 year, 2016; adult-use retail sales began later."
+  - "Active license total should be extracted from DCC license search or a downloadable official data source if available."

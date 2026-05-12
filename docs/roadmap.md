@@ -21,6 +21,7 @@ MOBY Atlas is a source-cited cannabis state reference project for comparing stat
   - `list`
   - `show <state>`
   - `validate`
+  - `compare <state> <state>`
 
 Status: complete
 
