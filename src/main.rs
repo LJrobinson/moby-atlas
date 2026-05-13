@@ -102,6 +102,13 @@ enum Commands {
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
+
+    /// Report missing or weak source fields across all dossiers
+    Sources {
+        /// Directory containing state YAML files
+        #[arg(short, long, default_value = "data/states")]
+        data_dir: PathBuf,
+    },
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -246,6 +253,28 @@ struct StateSummaryRow {
     active_license_confidence: String,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum SourceIssueSeverity {
+    Missing,
+    Weak,
+}
+
+impl SourceIssueSeverity {
+    fn as_str(self) -> &'static str {
+        match self {
+            SourceIssueSeverity::Missing => "MISSING",
+            SourceIssueSeverity::Weak => "WARN",
+        }
+    }
+}
+
+#[derive(Debug)]
+struct SourceIssue {
+    state: String,
+    severity: SourceIssueSeverity,
+    message: String,
+}
+
 fn find_active_license_issues(dossiers: &[StateDossier]) -> Vec<ActiveLicenseIssue> {
     let mut issues = Vec::new();
 
@@ -322,6 +351,23 @@ fn find_invalid_tax_categories(dossiers: &[StateDossier]) -> Vec<InvalidTaxCateg
     }
 
     invalid
+}
+
+fn find_source_issues(dossiers: &[StateDossier]) -> Vec<SourceIssue> {
+    let mut issues = Vec::new();
+
+    for dossier in dossiers {
+        let state = dossier.state.abbreviation.to_uppercase();
+
+        check_regulatory_bodies(&state, dossier, &mut issues);
+        check_track_and_trace_sources(&state, dossier, &mut issues);
+        check_license_type_sources(&state, dossier, &mut issues);
+        check_tax_sources(&state, dossier, &mut issues);
+        check_active_license_sources(&state, dossier, &mut issues);
+        check_official_sources(&state, dossier, &mut issues);
+    }
+
+    issues
 }
 
 impl CoverageStatus {
@@ -506,6 +552,227 @@ fn is_unknown_or_empty(value: &str) -> bool {
     normalized.is_empty() || normalized == "unknown"
 }
 
+fn push_missing(issues: &mut Vec<SourceIssue>, state: &str, message: impl Into<String>) {
+    issues.push(SourceIssue {
+        state: state.to_string(),
+        severity: SourceIssueSeverity::Missing,
+        message: message.into(),
+    });
+}
+
+fn push_weak(issues: &mut Vec<SourceIssue>, state: &str, message: impl Into<String>) {
+    issues.push(SourceIssue {
+        state: state.to_string(),
+        severity: SourceIssueSeverity::Weak,
+        message: message.into(),
+    });
+}
+
+fn check_receipt_fields(
+    issues: &mut Vec<SourceIssue>,
+    state: &str,
+    label: &str,
+    source_url: &str,
+    source_quality: &str,
+    last_checked: &str,
+    confidence: &str,
+) {
+    if is_unknown_or_empty(source_url) {
+        push_missing(issues, state, format!("{label} missing source_url"));
+    }
+
+    if is_unknown_or_empty(source_quality) {
+        push_missing(issues, state, format!("{label} missing source_quality"));
+    }
+
+    if is_unknown_or_empty(last_checked) {
+        push_missing(issues, state, format!("{label} missing last_checked"));
+    }
+
+    if is_unknown_or_empty(confidence) {
+        push_missing(issues, state, format!("{label} missing confidence"));
+    }
+
+    if confidence.trim().eq_ignore_ascii_case("medium") {
+        push_weak(issues, state, format!("{label} confidence is medium"));
+    }
+
+    if confidence.trim().eq_ignore_ascii_case("low") {
+        push_weak(issues, state, format!("{label} confidence is low"));
+    }
+
+    if source_quality.trim().eq_ignore_ascii_case("secondary_source") {
+        push_weak(issues, state, format!("{label} uses secondary_source"));
+    }
+
+    if source_quality.trim().eq_ignore_ascii_case("official_vendor") {
+        push_weak(issues, state, format!("{label} uses official_vendor instead of official regulator/tax/statute source"));
+    }
+}
+
+fn check_regulatory_bodies(state: &str, dossier: &StateDossier, issues: &mut Vec<SourceIssue>) {
+    if dossier.regulatory_bodies.is_empty() {
+        push_missing(issues, state, "regulatory_bodies empty");
+        return;
+    }
+
+    for body in &dossier.regulatory_bodies {
+        let label = format!(
+            "regulatory_body '{}'",
+            format_empty_as_unknown(&body.name)
+        );
+
+        if is_unknown_or_empty(&body.name) {
+            push_missing(issues, state, format!("{label} missing name"));
+        }
+
+        if is_unknown_or_empty(&body.website) {
+            push_missing(issues, state, format!("{label} missing website"));
+        }
+
+        if is_unknown_or_empty(&body.body_type) {
+            push_missing(issues, state, format!("{label} missing type"));
+        }
+    }
+}
+
+fn check_track_and_trace_sources(
+    state: &str,
+    dossier: &StateDossier,
+    issues: &mut Vec<SourceIssue>,
+) {
+    if is_unknown_or_empty(&dossier.track_and_trace.system) {
+        push_missing(issues, state, "track_and_trace missing system");
+    }
+
+    if is_unknown_or_empty(&dossier.track_and_trace.status) {
+        push_missing(issues, state, "track_and_trace missing status");
+    }
+
+    check_receipt_fields(
+        issues,
+        state,
+        "track_and_trace",
+        &dossier.track_and_trace.source_url,
+        &dossier.track_and_trace.source_quality,
+        &dossier.track_and_trace.last_checked,
+        &dossier.track_and_trace.confidence,
+    );
+}
+
+fn check_license_type_sources(
+    state: &str,
+    dossier: &StateDossier,
+    issues: &mut Vec<SourceIssue>,
+) {
+    if dossier.license_types.is_empty() {
+        push_missing(issues, state, "license_types empty");
+        return;
+    }
+
+    for license in &dossier.license_types {
+        if is_unknown_or_empty(&license.name) && is_unknown_or_empty(&license.category) {
+            push_missing(issues, state, "license_type placeholder entry");
+            continue;
+        }
+
+        let label = format!(
+            "license_type '{}'",
+            format_empty_as_unknown(&license.name)
+        );
+
+        if is_unknown_or_empty(&license.name) {
+            push_missing(issues, state, format!("{label} missing name"));
+        }
+
+        if is_unknown_or_empty(&license.category) {
+            push_missing(issues, state, format!("{label} missing category"));
+        }
+
+        check_receipt_fields(
+            issues,
+            state,
+            &label,
+            &license.source_url,
+            &license.source_quality,
+            &license.last_checked,
+            &license.confidence,
+        );
+    }
+}
+
+fn check_tax_sources(state: &str, dossier: &StateDossier, issues: &mut Vec<SourceIssue>) {
+    if dossier.taxes.is_empty() {
+        push_missing(issues, state, "taxes empty");
+        return;
+    }
+
+    for tax in &dossier.taxes {
+        if is_unknown_or_empty(&tax.name) && is_unknown_or_empty(&tax.category) {
+            push_missing(issues, state, "tax placeholder entry");
+            continue;
+        }
+
+        let label = format!("tax '{}'", format_empty_as_unknown(&tax.name));
+
+        if is_unknown_or_empty(&tax.name) {
+            push_missing(issues, state, format!("{label} missing name"));
+        }
+
+        if is_unknown_or_empty(&tax.category) {
+            push_missing(issues, state, format!("{label} missing category"));
+        }
+
+        if is_unknown_or_empty(&tax.applies_to) {
+            push_missing(issues, state, format!("{label} missing applies_to"));
+        }
+
+        if is_unknown_or_empty(&tax.rate) {
+            push_weak(issues, state, format!("{label} missing/unknown rate"));
+        }
+
+        check_receipt_fields(
+            issues,
+            state,
+            &label,
+            &tax.source_url,
+            &tax.source_quality,
+            &tax.last_checked,
+            &tax.confidence,
+        );
+    }
+}
+
+fn check_active_license_sources(
+    state: &str,
+    dossier: &StateDossier,
+    issues: &mut Vec<SourceIssue>,
+) {
+    let active = &dossier.active_licenses;
+
+    check_receipt_fields(
+        issues,
+        state,
+        "active_licenses",
+        &active.source_url,
+        &active.source_quality,
+        &active.last_checked,
+        &active.confidence,
+    );
+
+    if is_unknown_or_empty(&active.as_of) {
+        push_weak(issues, state, "active_licenses missing as_of");
+    }
+
+    if active.total.is_none() {
+        push_weak(issues, state, "active_licenses total unknown");
+    }
+
+    if active.by_type.is_empty() {
+        push_weak(issues, state, "active_licenses by_type empty");
+    }
+}
+
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
@@ -522,9 +789,47 @@ fn main() -> Result<()> {
             Commands::Categories { data_dir } => show_license_categories(&data_dir),
             Commands::TaxCategories { data_dir } => show_tax_categories(&data_dir),
             Commands::Licenses { data_dir } => show_active_licenses(&data_dir),
+            Commands::Sources { data_dir } => report_sources(&data_dir),
             Commands::ExportJson { out, data_dir } => export_json(&data_dir, &out),
             Commands::ExportCsv { out, data_dir } => export_csv(&data_dir, &out),
         }
+}
+
+fn check_official_sources(state: &str, dossier: &StateDossier, issues: &mut Vec<SourceIssue>) {
+    if dossier.official_sources.is_empty() {
+        push_missing(issues, state, "official_sources empty");
+        return;
+    }
+
+    for source in &dossier.official_sources {
+        if is_unknown_or_empty(&source.title) && is_unknown_or_empty(&source.url) {
+            push_missing(issues, state, "official_source placeholder entry");
+            continue;
+        }
+
+        let label = format!(
+            "official_source '{}'",
+            format_empty_as_unknown(&source.title)
+        );
+
+        if is_unknown_or_empty(&source.title) {
+            push_missing(issues, state, format!("{label} missing title"));
+        }
+
+        if is_unknown_or_empty(&source.source_type) {
+            push_missing(issues, state, format!("{label} missing type"));
+        }
+
+        check_receipt_fields(
+            issues,
+            state,
+            &label,
+            &source.url,
+            &source.source_quality,
+            &source.last_checked,
+            &source.confidence,
+        );
+    }
 }
 
 fn list_states(data_dir: &Path) -> Result<()> {
@@ -1087,6 +1392,58 @@ fn export_csv(data_dir: &Path, out: &Path) -> Result<()> {
     writer.flush()?;
 
     println!("Exported {} state summary row(s) to {}", dossiers.len(), out.display());
+
+    Ok(())
+}
+
+fn report_sources(data_dir: &Path) -> Result<()> {
+    let dossiers = load_all_dossiers(data_dir)?;
+    let issues = find_source_issues(&dossiers);
+
+    println!("MOBY Atlas Source Completeness Report");
+    println!();
+
+    let mut states_with_issues = 0;
+
+    for dossier in &dossiers {
+        let state = dossier.state.abbreviation.to_uppercase();
+
+        let state_issues: Vec<&SourceIssue> = issues
+            .iter()
+            .filter(|issue| issue.state == state)
+            .collect();
+
+        println!("{state}:");
+
+        if state_issues.is_empty() {
+            println!("  OK: no source issues found");
+        } else {
+            states_with_issues += 1;
+
+            for issue in state_issues {
+                println!("  {}: {}", issue.severity.as_str(), issue.message);
+            }
+        }
+
+        println!();
+    }
+
+    let missing_count = issues
+        .iter()
+        .filter(|issue| issue.severity == SourceIssueSeverity::Missing)
+        .count();
+
+    let weak_count = issues
+        .iter()
+        .filter(|issue| issue.severity == SourceIssueSeverity::Weak)
+        .count();
+
+    println!("Summary:");
+    println!("States scanned: {}", dossiers.len());
+    println!("States with issues: {states_with_issues}");
+    println!("Missing source fields: {missing_count}");
+    println!("Weak source fields: {weak_count}");
+    println!("Total source issues: {}", issues.len());
 
     Ok(())
 }

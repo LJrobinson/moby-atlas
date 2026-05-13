@@ -159,6 +159,8 @@ Add a command to identify missing source links or incomplete dossiers.
 cargo run -- sources
 ```
 
+status: complete
+
 ## v0.9.0 - Finalize First Atlas
 
 Push to release:

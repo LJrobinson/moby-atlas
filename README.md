@@ -45,6 +45,7 @@ Additional states can be added later by creating new state dossier files in `dat
 - Active license count reporting with source/as-of/confidence fields
 - JSON export for full state dossiers
 - CSV export for flattened state summary data
+- Source completeness reporting for missing or weak source receipts
 
 ## Planned Features
 
@@ -133,6 +134,14 @@ Custom output paths:
 cargo run -- export-json --out exports/moby-atlas.json
 cargo run -- export-csv --out exports/moby-atlas-states.csv
 ```
+
+Report missing or weak source fields:
+
+```bash
+cargo run -- sources
+```
+
+
 
 ## Data Philosophy
 
