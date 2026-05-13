@@ -1,8 +1,8 @@
 [package]
 name = "moby-atlas"
-version = "0.1.0"
+version = "0.9.0"
 edition = "2021"
-description = "Source-cited cannabis state atlas for regulators, license types, taxes, compliance systems, and market structure."
+description = "Rust CLI and source-cited cannabis state atlas for comparing regulators, license types, taxes, track-and-trace systems, and active license sources."
 license = "MIT"
 repository = "https://github.com/LJrobinson/moby-atlas"
 

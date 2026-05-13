@@ -70,7 +70,7 @@ taxes:
   - name: Adult-Use Cannabis Tax
     category: adult_use_tax
     applies_to: "Adult-use cannabis sales"
-    rate: ""
+    rate: "unknown"
     source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana"
     source_quality: official_regulator
     last_checked: 2026-05-12
@@ -79,7 +79,7 @@ taxes:
 
 active_licenses:
   total: null
-  as_of: ""
+  as_of: "unknown"
   source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana"
   source_quality: official_regulator
   last_checked: 2026-05-12

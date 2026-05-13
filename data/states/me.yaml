@@ -94,16 +94,16 @@ taxes:
   - name: Medical Cannabis Tax
     category: medical_cannabis_tax
     applies_to: "Medical cannabis sales"
-    rate: ""
+    rate: "unknown"
     source_url: "https://www.maine.gov/revenue/"
     source_quality: official_tax_agency
     last_checked: 2026-05-12
-    confidence: unknown
+    confidence: low
     notes: "Medical cannabis tax treatment should be verified against current Maine Revenue Services guidance before finalizing."
 
 active_licenses:
   total: null
-  as_of: ""
+  as_of: "unknown"
   source_url: "https://www11.maine.gov/dafs/ocp/open-data/adult-use/licensee-search"
   source_quality: official_regulator
   last_checked: 2026-05-12

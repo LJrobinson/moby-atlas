@@ -112,7 +112,7 @@ taxes:
 
 active_licenses:
   total: null
-  as_of: ""
+  as_of: "unknown"
   source_url: "https://masscannabiscontrol.com/open-data/"
   source_quality: official_open_data
   last_checked: 2026-05-12

@@ -133,7 +133,7 @@ taxes:
 
 active_licenses:
   total: null
-  as_of: ""
+  as_of: "unknown"
   source_url: "https://cannabis.ny.gov/dispensary-location-verification"
   source_quality: official_regulator
   last_checked: 2026-05-12

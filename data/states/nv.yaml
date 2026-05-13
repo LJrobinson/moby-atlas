@@ -76,7 +76,7 @@ taxes:
   - name: Wholesale Cannabis Excise Tax
     category: wholesale_tax
     applies_to: "Wholesale cannabis transactions"
-    rate: ""
+    rate: "unknown"
     source_url: "https://ccb.nv.gov/wp-content/uploads/2026/02/CCB-Tax-Release-Annual-Cannabis-Taxable-Sales-Data-V2.pdf"
     source_quality: official_regulator
     last_checked: 2026-05-12

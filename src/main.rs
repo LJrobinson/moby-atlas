@@ -1,13 +1,16 @@
 use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::collections::BTreeMap;
 
 #[derive(Parser, Debug)]
 #[command(name = "moby-atlas")]
-#[command(about = "MOBY Atlas: source-cited cannabis state reference CLI")]
+#[command(
+    about = "MOBY Atlas: source-cited cannabis state comparison CLI",
+    long_about = "MOBY Atlas (Marijuana Operator Business Yardstick) compares state cannabis regulators, license types, taxes, and track-and-trace systems, while reporting active license sources and source completeness across YAML state dossiers."
+)]
 #[command(version)]
 struct Cli {
     #[command(subcommand)]
@@ -16,31 +19,31 @@ struct Cli {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
-    /// List all available state dossiers
+    /// List available state dossiers
     List {
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Show one state dossier as JSON
+    /// Show one state dossier as pretty JSON
     Show {
         /// State abbreviation, such as NV, MA, CA
         state: String,
 
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Validate all state dossier files
+    /// Validate required state coverage and canonical categories
     Validate {
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Compare two state dossiers
+    /// Compare two states across programs, regulators, tracking, licenses, taxes, and active license availability
     Compare {
         /// First state abbreviation, such as NV
         left: String,
@@ -48,64 +51,64 @@ enum Commands {
         /// Second state abbreviation, such as MA
         right: String,
 
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Report dossier coverage status for all states
+    /// Score dossier completeness across major modeled fields and source receipts
     Coverage {
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Show license labels grouped by canonical category
+    /// Group state license labels by canonical category
     Categories {
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Show cannabis taxes grouped by canonical tax category
+    /// Group cannabis taxes by canonical tax category
     TaxCategories {
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Show active license count sources and known counts
+    /// Report active license counts, sources, as-of dates, and confidence
     Licenses {
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Export all state dossiers as JSON
+    /// Export the full YAML-backed atlas as JSON
     ExportJson {
         /// Output JSON file path
         #[arg(short, long, default_value = "exports/moby-atlas.json")]
         out: PathBuf,
 
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Export flattened state summary data as CSV
+    /// Export flattened one-row-per-state summary data as CSV
     ExportCsv {
         /// Output CSV file path
         #[arg(short, long, default_value = "exports/moby-atlas-states.csv")]
         out: PathBuf,
 
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
 
-    /// Report missing or weak source fields across all dossiers
+    /// Audit missing or weak source receipt metadata
     Sources {
-        /// Directory containing state YAML files
+        /// Directory containing state YAML dossier files
         #[arg(short, long, default_value = "data/states")]
         data_dir: PathBuf,
     },
@@ -525,9 +528,10 @@ fn has_source_receipts(dossier: &StateDossier) -> bool {
         )
     });
 
-    let tax_has_receipt = dossier.taxes.iter().any(|tax| {
-        has_receipt_fields(&tax.source_quality, &tax.last_checked, &tax.confidence)
-    });
+    let tax_has_receipt = dossier
+        .taxes
+        .iter()
+        .any(|tax| has_receipt_fields(&tax.source_quality, &tax.last_checked, &tax.confidence));
 
     let official_source_has_receipt = dossier.official_sources.iter().any(|source| {
         has_receipt_fields(
@@ -601,12 +605,24 @@ fn check_receipt_fields(
         push_weak(issues, state, format!("{label} confidence is low"));
     }
 
-    if source_quality.trim().eq_ignore_ascii_case("secondary_source") {
+    if source_quality
+        .trim()
+        .eq_ignore_ascii_case("secondary_source")
+    {
         push_weak(issues, state, format!("{label} uses secondary_source"));
     }
 
-    if source_quality.trim().eq_ignore_ascii_case("official_vendor") {
-        push_weak(issues, state, format!("{label} uses official_vendor instead of official regulator/tax/statute source"));
+    if source_quality
+        .trim()
+        .eq_ignore_ascii_case("official_vendor")
+    {
+        push_weak(
+            issues,
+            state,
+            format!(
+                "{label} uses official_vendor instead of official regulator/tax/statute source"
+            ),
+        );
     }
 }
 
@@ -617,10 +633,7 @@ fn check_regulatory_bodies(state: &str, dossier: &StateDossier, issues: &mut Vec
     }
 
     for body in &dossier.regulatory_bodies {
-        let label = format!(
-            "regulatory_body '{}'",
-            format_empty_as_unknown(&body.name)
-        );
+        let label = format!("regulatory_body '{}'", format_empty_as_unknown(&body.name));
 
         if is_unknown_or_empty(&body.name) {
             push_missing(issues, state, format!("{label} missing name"));
@@ -660,11 +673,7 @@ fn check_track_and_trace_sources(
     );
 }
 
-fn check_license_type_sources(
-    state: &str,
-    dossier: &StateDossier,
-    issues: &mut Vec<SourceIssue>,
-) {
+fn check_license_type_sources(state: &str, dossier: &StateDossier, issues: &mut Vec<SourceIssue>) {
     if dossier.license_types.is_empty() {
         push_missing(issues, state, "license_types empty");
         return;
@@ -676,10 +685,7 @@ fn check_license_type_sources(
             continue;
         }
 
-        let label = format!(
-            "license_type '{}'",
-            format_empty_as_unknown(&license.name)
-        );
+        let label = format!("license_type '{}'", format_empty_as_unknown(&license.name));
 
         if is_unknown_or_empty(&license.name) {
             push_missing(issues, state, format!("{label} missing name"));
@@ -776,23 +782,23 @@ fn check_active_license_sources(
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
-        match cli.command {
-            Commands::List { data_dir } => list_states(&data_dir),
-            Commands::Show { state, data_dir } => show_state(&state, &data_dir),
-            Commands::Validate { data_dir } => validate_states(&data_dir),
-            Commands::Compare {
-                left,
-                right,
-                data_dir,
-            } => compare_states(&left, &right, &data_dir),
-            Commands::Coverage { data_dir } => report_coverage(&data_dir),
-            Commands::Categories { data_dir } => show_license_categories(&data_dir),
-            Commands::TaxCategories { data_dir } => show_tax_categories(&data_dir),
-            Commands::Licenses { data_dir } => show_active_licenses(&data_dir),
-            Commands::Sources { data_dir } => report_sources(&data_dir),
-            Commands::ExportJson { out, data_dir } => export_json(&data_dir, &out),
-            Commands::ExportCsv { out, data_dir } => export_csv(&data_dir, &out),
-        }
+    match cli.command {
+        Commands::List { data_dir } => list_states(&data_dir),
+        Commands::Show { state, data_dir } => show_state(&state, &data_dir),
+        Commands::Validate { data_dir } => validate_states(&data_dir),
+        Commands::Compare {
+            left,
+            right,
+            data_dir,
+        } => compare_states(&left, &right, &data_dir),
+        Commands::Coverage { data_dir } => report_coverage(&data_dir),
+        Commands::Categories { data_dir } => show_license_categories(&data_dir),
+        Commands::TaxCategories { data_dir } => show_tax_categories(&data_dir),
+        Commands::Licenses { data_dir } => show_active_licenses(&data_dir),
+        Commands::Sources { data_dir } => report_sources(&data_dir),
+        Commands::ExportJson { out, data_dir } => export_json(&data_dir, &out),
+        Commands::ExportCsv { out, data_dir } => export_csv(&data_dir, &out),
+    }
 }
 
 fn check_official_sources(state: &str, dossier: &StateDossier, issues: &mut Vec<SourceIssue>) {
@@ -859,7 +865,9 @@ fn show_state(state: &str, data_dir: &Path) -> Result<()> {
 fn validate_states(data_dir: &Path) -> Result<()> {
     let dossiers = load_all_dossiers(data_dir)?;
 
-    let expected_states = ["PA", "MA", "MD", "MI", "WV", "OR", "NV", "CA", "NY", "CO", "ME"];
+    let expected_states = [
+        "PA", "MA", "MD", "MI", "WV", "OR", "NV", "CA", "NY", "CO", "ME",
+    ];
 
     let found: Vec<String> = dossiers
         .iter()
@@ -1202,11 +1210,7 @@ fn show_tax_categories(data_dir: &Path) -> Result<()> {
                 continue;
             }
 
-            let label = format!(
-                "{} - {}",
-                tax.name,
-                format_empty_as_unknown(&tax.rate)
-            );
+            let label = format!("{} - {}", tax.name, format_empty_as_unknown(&tax.rate));
 
             categories
                 .entry(tax.category)
@@ -1331,8 +1335,9 @@ fn find_invalid_license_categories(dossiers: &[StateDossier]) -> Vec<InvalidLice
 fn ensure_parent_dir(path: &Path) -> Result<()> {
     if let Some(parent) = path.parent() {
         if !parent.as_os_str().is_empty() {
-            fs::create_dir_all(parent)
-                .with_context(|| format!("Could not create output directory: {}", parent.display()))?;
+            fs::create_dir_all(parent).with_context(|| {
+                format!("Could not create output directory: {}", parent.display())
+            })?;
         }
     }
 
@@ -1348,7 +1353,11 @@ fn export_json(data_dir: &Path, out: &Path) -> Result<()> {
     fs::write(out, json)
         .with_context(|| format!("Could not write JSON export: {}", out.display()))?;
 
-    println!("Exported {} state dossier(s) to {}", dossiers.len(), out.display());
+    println!(
+        "Exported {} state dossier(s) to {}",
+        dossiers.len(),
+        out.display()
+    );
 
     Ok(())
 }
@@ -1391,7 +1400,11 @@ fn export_csv(data_dir: &Path, out: &Path) -> Result<()> {
 
     writer.flush()?;
 
-    println!("Exported {} state summary row(s) to {}", dossiers.len(), out.display());
+    println!(
+        "Exported {} state summary row(s) to {}",
+        dossiers.len(),
+        out.display()
+    );
 
     Ok(())
 }
@@ -1408,10 +1421,8 @@ fn report_sources(data_dir: &Path) -> Result<()> {
     for dossier in &dossiers {
         let state = dossier.state.abbreviation.to_uppercase();
 
-        let state_issues: Vec<&SourceIssue> = issues
-            .iter()
-            .filter(|issue| issue.state == state)
-            .collect();
+        let state_issues: Vec<&SourceIssue> =
+            issues.iter().filter(|issue| issue.state == state).collect();
 
         println!("{state}:");
 
