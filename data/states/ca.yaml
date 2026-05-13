@@ -19,11 +19,11 @@ regulatory_bodies:
 track_and_trace:
   system: CCTT-Metrc
   status: active
-  source_url: "https://www.metrc.com/partner/california/"
-  source_quality: official_vendor
-  last_checked: 2026-05-12
+  source_url: "https://www.cannabis.ca.gov/posts/dcc-announces-new-software-contract-with-metrc/"
+  source_quality: official_regulator
+  last_checked: 2026-05-13
   confidence: high
-  notes: "California's cannabis track-and-trace implementation is commonly referred to as CCTT-Metrc. DCC and CDTFA materials also refer to the California Cannabis Track-and-Trace system."
+  notes: "California's cannabis track-and-trace implementation is modeled as CCTT-Metrc based on DCC's Metrc software contract announcement and DCC CCTT references."
 
 license_types:
   - name: Cultivation
@@ -152,13 +152,13 @@ official_sources:
     last_checked: 2026-05-12
     confidence: high
     notes: "Official CDTFA cannabis tax guidance for businesses."
-  - title: California Metrc
+  - title: California DCC Metrc Software Contract
     type: track_and_trace_reference
-    url: "https://www.metrc.com/partner/california/"
-    source_quality: official_vendor
-    last_checked: 2026-05-12
+    url: "https://www.cannabis.ca.gov/posts/dcc-announces-new-software-contract-with-metrc/"
+    source_quality: official_regulator
+    last_checked: 2026-05-13
     confidence: high
-    notes: "Metrc California partner page describing California's selected track-and-trace system."
+    notes: "Official DCC announcement that DCC executed a Metrc contract for track-and-trace software and services."
   - title: California Proposition 64
     type: statute_or_ballot_reference
     url: "https://courts.ca.gov/programs-initiatives/criminal-justice-services/proposition-64-adult-use-marijuana-act"

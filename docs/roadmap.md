@@ -15,7 +15,7 @@ MOBY Atlas is a source-cited cannabis state reference project for comparing regu
 | v0.7.0 | Export Commands | Complete |
 | v0.8.0 | Source Completeness Report | Complete |
 | v0.9.0 | Finalize First Atlas / GitHub Polish | Complete |
-| v1.0.0 | First Complete Atlas | Planned |
+| v1.0.0 | First Complete Atlas | Ready for user review |
 
 ## v0.1.0 - Framework
 
@@ -195,8 +195,11 @@ Definition of done:
 - Each state has cannabis tax entries mapped to canonical tax categories.
 - Each state has active license source coverage, or a clear note explaining why official count extraction is still pending.
 - Source completeness report has no critical missing receipt fields.
+- Weak source warnings are either reduced or intentionally retained with notes that explain the uncertainty.
 - Comparison, category, license, source, and export commands work from a clean checkout.
-- README and docs explain scope, limitations, and disclaimer clearly.
+- README and docs describe v1.0.0 as a usable source-cited first atlas, not a complete legal compliance database.
+
+Status: ready for user review before tagging.
 
 ## Future Roadmap
 

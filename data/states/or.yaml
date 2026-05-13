@@ -104,11 +104,11 @@ taxes:
 
 active_licenses:
   total: null
-  as_of: "unknown"
-  source_url: "https://www.oregon.gov/olcc/marijuana/pages/licensing.aspx"
+  as_of: "interactive report"
+  source_url: "https://www.oregon.gov/olcc/marijuana/Pages/Recreational-Marijuana-Licensee-Reports.aspx"
   source_quality: official_regulator
-  last_checked: 2026-05-12
-  confidence: medium
+  last_checked: 2026-05-13
+  confidence: high
   by_type: []
 
 official_sources:
@@ -126,6 +126,13 @@ official_sources:
     last_checked: 2026-05-12
     confidence: high
     notes: "Official OLCC marijuana licensing page."
+  - title: Oregon Marijuana Licensed Businesses
+    type: active_license_list
+    url: "https://www.oregon.gov/olcc/marijuana/Pages/Recreational-Marijuana-Licensee-Reports.aspx"
+    source_quality: official_regulator
+    last_checked: 2026-05-13
+    confidence: high
+    notes: "Official OLCC page linking an interactive report of all marijuana licensed businesses."
   - title: Oregon Recreational Marijuana Rules
     type: statute_or_regulation
     url: "https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=3873"
@@ -167,4 +174,4 @@ notes:
   - "Oregon is modeled as medical plus adult-use."
   - "Medical started_year uses Measure 67 / Oregon Medical Marijuana Act year, 1998."
   - "Adult-use started_year uses Measure 91 approval year, 2014; adult-use sales began later."
-  - "Active license totals still need extraction from OLCC licensing data or official reports."
+  - "Active license totals still need extraction from OLCC's interactive licensed-business report."

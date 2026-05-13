@@ -103,10 +103,10 @@ taxes:
 
 active_licenses:
   total: null
-  as_of: "unknown"
+  as_of: "2026-05-11"
   source_url: "https://www11.maine.gov/dafs/ocp/open-data/adult-use/licensee-search"
   source_quality: official_regulator
-  last_checked: 2026-05-12
+  last_checked: 2026-05-13
   confidence: high
   by_type: []
 
@@ -143,9 +143,9 @@ official_sources:
     type: active_license_list
     url: "https://www11.maine.gov/dafs/ocp/open-data/adult-use/licensee-search"
     source_quality: official_regulator
-    last_checked: 2026-05-12
+    last_checked: 2026-05-13
     confidence: high
-    notes: "Official OCP applicant/licensee search tool."
+    notes: "Official OCP applicant/licensee search tool; downloadable data states it was last updated May 11, 2026 and is refreshed weekly/monthly depending on view."
   - title: Maine Adult Use Cannabis Program Rule
     type: statute_or_regulation
     url: "https://www.maine.gov/dafs/ocp/sites/maine.gov.dafs.ocp/files/inline-files/18-691-CMR-Ch1%2009-08-22.pdf"
@@ -182,4 +182,4 @@ notes:
   - "Adult-use started_year uses adult-use legalization vote year, 2016; adult-use retail sales began later."
   - "Track-and-trace is marked Metrc only at medium confidence until direct OCP/Metrc vendor confirmation is added."
   - "Adult-use sales tax rate should be re-verified against current MRS tables before marking final."
-  - "Active license totals still need extraction from OCP licensee search."
+  - "Active license totals still need extraction from OCP licensee search/downloadable data."

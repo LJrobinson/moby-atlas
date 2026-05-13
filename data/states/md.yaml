@@ -112,8 +112,8 @@ active_licenses:
   as_of: "unknown"
   source_url: "https://cannabis.maryland.gov/Pages/Data-Dashboard.aspx"
   source_quality: official_regulator
-  last_checked: 2026-05-12
-  confidence: medium
+  last_checked: 2026-05-13
+  confidence: high
   by_type: []
 
 official_sources:
@@ -163,9 +163,9 @@ official_sources:
     type: active_license_list
     url: "https://cannabis.maryland.gov/Pages/Data-Dashboard.aspx"
     source_quality: official_regulator
-    last_checked: 2026-05-12
-    confidence: medium
-    notes: "Official MCA data dashboard; active license counts still need extraction."
+    last_checked: 2026-05-13
+    confidence: high
+    notes: "Official MCA data dashboard includes a Count of License by Business Type resource; active license counts still need extraction."
 
 notes:
   - "Initial real Maryland dossier."

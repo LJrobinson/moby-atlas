@@ -122,19 +122,19 @@ taxes:
     category: wholesale_tax
     applies_to: "Adult-use marijuana wholesale transactions"
     rate: "24%"
-    source_url: "https://tax.thomsonreuters.com/news/michigan-issues-additional-guidance-on-wholesale-tax-on-adult-use-marihuana/"
-    source_quality: secondary_source
-    last_checked: 2026-05-12
-    confidence: medium
-    notes: "Included as a current-risk note based on secondary reporting; replace with official Michigan Treasury guidance when located."
+    source_url: "https://www.michigan.gov/taxes/business-taxes/wholesale-marijuana-tax"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-13
+    confidence: high
+    notes: "Michigan Treasury states the 24% Wholesale Marijuana Tax applies to certain adult-use marijuana wholesale sales or transfers beginning January 1, 2026."
 
 active_licenses:
   total: null
-  as_of: "unknown"
-  source_url: "https://www.michigan.gov/cra/sections/reports-and-legal"
+  as_of: "live lookup"
+  source_url: "https://www.michigan.gov/cra/verify-a-license-1"
   source_quality: official_regulator
-  last_checked: 2026-05-12
-  confidence: medium
+  last_checked: 2026-05-13
+  confidence: high
   by_type: []
 
 official_sources:
@@ -173,18 +173,25 @@ official_sources:
     last_checked: 2026-05-12
     confidence: high
     notes: "Official Michigan Treasury page for 10% MRE tax and 6% sales tax."
-  - title: Michigan Cannabis Reports and Legal
+  - title: Michigan Wholesale Marijuana Tax
+    type: tax_reference
+    url: "https://www.michigan.gov/taxes/business-taxes/wholesale-marijuana-tax"
+    source_quality: official_tax_agency
+    last_checked: 2026-05-13
+    confidence: high
+    notes: "Official Michigan Treasury page for the 24% wholesale marijuana tax effective January 1, 2026."
+  - title: Michigan Verify a License
     type: active_license_list
-    url: "https://www.michigan.gov/cra/sections/reports-and-legal"
+    url: "https://www.michigan.gov/cra/verify-a-license-1"
     source_quality: official_regulator
-    last_checked: 2026-05-12
-    confidence: medium
-    notes: "Official CRA reports page; active license counts may be available through monthly statistical reports."
+    last_checked: 2026-05-13
+    confidence: high
+    notes: "Official CRA license verification page; CRA says leaving search fields blank allows downloading the entire database of licensees for adult-use and medical facilities."
 
 notes:
   - "Initial real Michigan dossier."
   - "Michigan is modeled as medical plus adult-use."
   - "Medical started_year uses Michigan Medical Marihuana Act year, 2008."
   - "Adult-use started_year uses MRTMA voter approval year, 2018."
-  - "The 24% adult-use wholesale marijuana tax is included as a medium-confidence secondary-source note until official Treasury guidance is linked."
-  - "Active license totals still need to be extracted from CRA monthly reports or license verification data."
+  - "The 24% adult-use wholesale marijuana tax is modeled from official Michigan Treasury guidance effective January 1, 2026."
+  - "Active license totals still need to be extracted from CRA license verification downloads or official monthly/statistical reports."

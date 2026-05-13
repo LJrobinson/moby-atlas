@@ -138,4 +138,4 @@ notes:
   - "West Virginia is modeled as medical-only with adult-use marked not_legal."
   - "Medical started_year uses West Virginia Medical Cannabis Act enactment year, 2017."
   - "Track-and-trace is marked Metrc with medium confidence because the current linked source is vendor-provided rather than direct OMC text."
-  - "Active license totals still need extraction from official OMC license/location resources."
+  - "Active license totals still need extraction from official OMC license/location resources. OMC links to a vendor-hosted OMC Progress dashboard, but counts should be reconciled against official OMC reporting before copying into this dossier."

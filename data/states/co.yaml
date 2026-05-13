@@ -19,11 +19,11 @@ regulatory_bodies:
 track_and_trace:
   system: Metrc
   status: active
-  source_url: "https://www.metrc.com/partner/colorado/"
-  source_quality: official_vendor
-  last_checked: 2026-05-12
+  source_url: "https://sbg.colorado.gov/sites/sbg/files/documents/211209_IB_21-11_RE_New_Statutory_and_Rule_Requirements_Effective_1_1_2022_HB21-1317.pdf"
+  source_quality: official_regulator
+  last_checked: 2026-05-13
   confidence: medium
-  notes: "Colorado is generally treated as a Metrc state. Current official MED source should be verified directly before marking this as regulator-confirmed."
+  notes: "Official MED bulletin identifies the Inventory Tracking System as Metrc. Confidence remains medium because this is an implementation bulletin rather than a current system homepage."
 
 license_types:
   - name: Medical Marijuana Store
@@ -173,6 +173,13 @@ official_sources:
     last_checked: 2026-05-12
     confidence: high
     notes: "Official MED public lookup for marijuana license verification."
+  - title: Colorado MED Inventory Tracking System Bulletin
+    type: track_and_trace_reference
+    url: "https://sbg.colorado.gov/sites/sbg/files/documents/211209_IB_21-11_RE_New_Statutory_and_Rule_Requirements_Effective_1_1_2022_HB21-1317.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-13
+    confidence: medium
+    notes: "Official MED industry bulletin naming Metrc as the Inventory Tracking System; retained at medium confidence because it is not a current system landing page."
   - title: Colorado Marijuana Excise Tax
     type: tax_reference
     url: "https://tax.colorado.gov/marijuana-excise-tax"
@@ -214,5 +221,5 @@ notes:
   - "Colorado is modeled as medical plus adult-use."
   - "Medical started_year uses Amendment 20 year, 2000."
   - "Adult-use started_year uses Amendment 64 year, 2012; adult-use retail sales began later."
-  - "Track-and-trace is marked Metrc with medium confidence until an official regulator page is added to the dossier as the direct source."
+  - "Track-and-trace is marked Metrc with medium confidence based on an official MED implementation bulletin; replace with a current regulator system page if one becomes available."
   - "Active license total should be extracted from MED public lookup or official downloadable license data if available."

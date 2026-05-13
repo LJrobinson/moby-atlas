@@ -113,10 +113,10 @@ taxes:
 active_licenses:
   total: null
   as_of: "unknown"
-  source_url: "https://masscannabiscontrol.com/open-data/"
+  source_url: "https://masscannabiscontrol.com/open-data/data-catalog/"
   source_quality: official_open_data
-  last_checked: 2026-05-12
-  confidence: medium
+  last_checked: 2026-05-13
+  confidence: high
   by_type: []
 
 official_sources:
@@ -148,8 +148,15 @@ official_sources:
     last_checked: 2026-05-12
     confidence: high
     notes: "Official Massachusetts local option excise tax reference."
+  - title: Massachusetts Cannabis Open Data Catalog
+    type: active_license_list
+    url: "https://masscannabiscontrol.com/open-data/data-catalog/"
+    source_quality: official_open_data
+    last_checked: 2026-05-13
+    confidence: high
+    notes: "Official CCC data catalog includes downloadable adult-use and medical licensing tracker data; active counts still need extraction and reconciliation."
 
 notes:
   - "Initial real Massachusetts dossier."
   - "Medical and adult-use start years still need official source confirmation before finalizing."
-  - "Active license totals need to be extracted from official CCC open data or licensing tracker."
+  - "Active license totals need to be extracted from the official CCC data catalog; the catalog notes that open data is self-reported by licensees."

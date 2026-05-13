@@ -22,7 +22,7 @@ MOBY Atlas is not trying to be a final legal database. It is a careful first atl
 
 ## Current Coverage
 
-The v0.9.0 first-atlas pass covers 11 state dossiers:
+The v1.0.0 first-atlas scope covers 11 state dossiers:
 
 | State | Code |
 |---|---|
@@ -328,9 +328,19 @@ moby-atlas/
 `-- README.md
 ```
 
+## GitHub Metadata Suggestions
+
+Suggested repository description:
+
+> Rust CLI and source-cited cannabis state atlas for comparing regulators, license types, taxes, track-and-trace systems, and active license sources.
+
+Suggested topics:
+
+`rust`, `cli`, `cannabis`, `cannabis-data`, `regulatory-data`, `compliance`, `open-data`, `yaml`, `serde`, `data-normalization`, `state-by-state`, `taxonomies`
+
 ## Roadmap
 
-Completed milestones:
+Milestone status:
 
 - v0.1.0 Framework
 - v0.2.0 Source receipts
@@ -341,8 +351,9 @@ Completed milestones:
 - v0.7.0 Export commands
 - v0.8.0 Source completeness report
 - v0.9.0 GitHub polish and first-atlas documentation pass
+- v1.0.0 Data completeness and source-quality audit for the 11-state first atlas: ready for user review
 
-The v1.0.0 target is a first complete atlas with stronger source coverage, cleaner active license extraction, and all current first-atlas states passing validation without critical metadata gaps. See [docs/roadmap.md](docs/roadmap.md).
+The v1.0.0 target is a usable source-cited first atlas, not a complete legal compliance database. It keeps uncertainty visible, validates the current 11-state scope, and reports no missing source receipt fields before tagging. See [docs/roadmap.md](docs/roadmap.md).
 
 ## Why This Matters
 

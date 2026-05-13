@@ -79,10 +79,10 @@ taxes:
 
 active_licenses:
   total: null
-  as_of: "unknown"
-  source_url: "https://www.pa.gov/agencies/health/programs/medical-marijuana"
+  as_of: "2026-04-01"
+  source_url: "https://www.pa.gov/content/dam/copapwp-pagov/en/health/documents/topics/documents/programs/medical-marijuana/Medical%20Marijuana%20Dispensaries%20in%20Pennsylvania%20with%20Product.pdf"
   source_quality: official_regulator
-  last_checked: 2026-05-12
+  last_checked: 2026-05-13
   confidence: medium
   by_type: []
 
@@ -115,6 +115,13 @@ official_sources:
     last_checked: 2026-05-12
     confidence: high
     notes: "Official dispensary program page."
+  - title: Pennsylvania Medical Marijuana Dispensaries with Product
+    type: active_license_list
+    url: "https://www.pa.gov/content/dam/copapwp-pagov/en/health/documents/topics/documents/programs/medical-marijuana/Medical%20Marijuana%20Dispensaries%20in%20Pennsylvania%20with%20Product.pdf"
+    source_quality: official_regulator
+    last_checked: 2026-05-13
+    confidence: medium
+    notes: "Official DOH PDF listing medical marijuana dispensaries with product as of April 1, 2026; it is a partial active-license proxy, not a full license-count extract."
   - title: Pennsylvania Laboratories
     type: license_type_reference
     url: "https://www.pa.gov/agencies/health/programs/medical-marijuana/laboratories"
@@ -134,4 +141,4 @@ notes:
   - "Initial real Pennsylvania dossier."
   - "Pennsylvania is modeled as medical-only with adult-use marked not_legal."
   - "Track-and-trace is intentionally labeled generically as Electronic Tracking System until current vendor/source is verified."
-  - "Active license totals still need to be extracted from official DOH permittee/location lists."
+  - "Active license totals still need to be extracted from official DOH permittee/location lists; the current active_license source is a dispensary-with-product list, not a full license-count extract."
